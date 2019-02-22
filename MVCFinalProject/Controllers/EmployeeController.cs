@@ -78,7 +78,7 @@ namespace MVCFinalProject.Controllers
         public ActionResult Edit(int? id)
         {
             Employee employee = new Employee();
-            if (id != 0)
+            if (id != 0 && id!=null)
             {
                 employee = db.Employees.Find(id);
             }
