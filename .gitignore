@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MVCFinalProject/v15
+/.vs/config
+/DBScripts/bin/Debug
+/DBScripts/obj/Debug
+/HRMS.Core/.vs/Demo.Core/v15
+/HRMS.Core/bin/Debug
+/HRMS.Core/obj/Debug
+/HRMS.Model/bin/Debug
+/HRMS.Model/obj/Debug
+/HRMS.Service/bin/Debug
+/HRMS.Service/obj/Debug
+/HRMS.Utility/bin/Debug
+/HRMS.Utility/obj/Debug
+/MVCFinalProject/obj/Debug
+/MVCFinalProject/bin
