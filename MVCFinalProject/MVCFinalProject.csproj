@@ -1343,6 +1343,7 @@
     <Content Include="Views\Transfer_Info\Details.cshtml" />
     <Content Include="Views\Transfer_Info\Edit.cshtml" />
     <Content Include="Views\Transfer_Info\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
