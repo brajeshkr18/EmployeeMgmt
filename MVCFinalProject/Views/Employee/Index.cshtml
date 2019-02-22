@@ -2,156 +2,137 @@
 
 @{
     ViewBag.Title = "Employee";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Employees </h5>
+                        @Html.ActionLink("Create New", "Create")
+                    </div>
+                  
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
 
-<h2>Employee</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table" width="600">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Father_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mother_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DOB)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nationality)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Maritual_status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Religion)
-            </th>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Gross_Salary)
+                                </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Gross_Salary)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Benefit.Benefit_Type)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Department.DName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Designation.DesName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Division.Division_Name)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Employee_Type.Employee_Types)
-            </th>*@
-        @*<th>
-                @Html.DisplayNameFor(model => model.Grade.Grade_Name)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Section.Section_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Home_phone)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Present_address)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.parmanent_address)
-            </th>*@
-        <th>Edit/Delete</th>
-    </tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Department.DName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Designation.DesName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Division.Division_Name)
+                                </th>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Father_Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mother_Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DOB)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nationality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Maritual_status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Religion)
-                </td>*@
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Section.Section_Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Mobile)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Gross_Salary)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Benefit.Benefit_Type)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Department.DName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Designation.DesName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Division.Division_Name)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Employee_Type.Employee_Types)
-                </td>*@
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Grade.Grade_Name)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Section.Section_Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Home_phone)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Present_address)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.parmanent_address)
-                </td>*@
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EmpID })
-                @Html.ActionLink("Details", "Details", new { id = item.EmpID })
-                @Html.ActionLink("Delete", "Delete", new { id = item.EmpID })
-            </td>
-        </tr>
-    }
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Present_address)
+                                </th>
+                                <th>Edit/Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
 
-</table>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gross_Salary)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Department.DName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Designation.DesName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Division.Division_Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Section.Section_Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mobile)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Present_address)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.EmpID })
+                                        @Html.ActionLink("Details", "Details", new { id = item.EmpID })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.EmpID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+        <!-- ============================================================== -->
+    </div>
+    </div>
+
+    
+    
