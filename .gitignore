@@ -17,3 +17,9 @@
 /HRMS.Utility/obj/Debug
 /MVCFinalProject/obj/Debug
 /MVCFinalProject/bin
+/HRMS.Utility/obj/Release
+/HRMS.Service/obj/Release
+/HRMS.Model/obj/Release
+/HRMS.Core/obj/Release
+/DBScripts/obj/Release
+/.vs

@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="../../html/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<script src="../../html/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../../html/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <div class="page-wrapper">
     <div class="container-fluid">
         <!-- ============================================================== -->
@@ -21,7 +24,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Forms Control</h4>
+                            <h4 class="card-title">Employee Details</h4>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -49,7 +52,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DOB, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(model => model.DOB, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.DOB, new { @class = "form-control" ,@placeholder = "mm/dd/yyyy", @autocomplete="off" })
                                     @Html.ValidationMessageFor(model => model.DOB)
                                 </div>
                             </div>
@@ -110,16 +113,36 @@
                                 </div>
                             </div>
 
+
+
+
+
+
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="submit" class="btn btn-primary">Reset</button>
+                                <a href="~/Employee/Index" class="btn btn-danger"> Cancel </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Employee Details</h4>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Present_address, new { @class = "control-label col-md-2" })
+                                <label class="control-label">Present Address</label>
                                 <div class="col-md-10">
                                     @Html.TextBoxFor(model => model.Present_address, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Present_address)
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.parmanent_address, new { @class = "control-label col-md-2" })
+                                <label class="control-label">Permanent Address</label>
                                 <div class="col-md-10">
                                     @Html.TextBoxFor(model => model.parmanent_address, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.parmanent_address)
@@ -153,7 +176,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.DivID, "DivID", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("DivID", String.Empty)
+                                    @Html.DropDownList("DivID", (IEnumerable<SelectListItem>)ViewBag.DropDownLoadRecoveryType, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.DivID)
                                 </div>
                             </div>
@@ -161,7 +184,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Benefit_ID, "Benefit_ID", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("Benefit_ID", String.Empty)
+                                    @Html.DropDownList("Benefit_ID", (IEnumerable<SelectListItem>)ViewBag.DropDownLoadRecoveryType, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Benefit_ID)
                                 </div>
                             </div>
@@ -169,7 +192,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.EmployeeType_ID, "EmployeeType_ID", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("EmployeeType_ID", String.Empty)
+                                    @Html.DropDownList("EmployeeType_ID", (IEnumerable<SelectListItem>)ViewBag.DropDownLoadRecoveryType, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.EmployeeType_ID)
                                 </div>
                             </div>
@@ -177,7 +200,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.GID, "GID", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("GID", String.Empty )
+                                    @Html.DropDownList("GID", (IEnumerable<SelectListItem>)ViewBag.DropDownLoadRecoveryType, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.GID)
                                 </div>
                             </div>
@@ -185,33 +208,13 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Gross_Salary, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(model => model.Gross_Salary ,new { @class="form-control"})
+                                    @Html.TextBoxFor(model => model.Gross_Salary, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Gross_Salary)
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Save" class="btn btn-default" />
-                                </div>
-                            </div>
-                            @*<div class="form-group">
-                                    <label for="position-top-right">Top right</label>
-                                    <input type="text" class="form-control">
-                                </div>*@
-                        </div>
-                        <div class="border-top">
-                            <div class="card-body">
-                                <button type="submit" class="btn btn-success">Save</button>
-                                <button type="submit" class="btn btn-primary">Reset</button>
-                                <button type="submit" class="btn btn-info">Edit</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
-                            </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         }
         <!-- editor -->
@@ -227,3 +230,12 @@
         <!-- ============================================================== -->
     </div>
 </div>
+<script>
+    /*datwpicker*/
+    jQuery('.DOB').datepicker();
+    jQuery('#DOB').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+   
+</script>

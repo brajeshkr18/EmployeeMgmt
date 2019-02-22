@@ -17,7 +17,8 @@ namespace MVCFinalProject.Controllers
         // GET: /Employee/
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Benefit).Include(e => e.Department).Include(e => e.Designation).Include(e => e.Division).Include(e => e.Employee_Type).Include(e => e.Grade).Include(e => e.Section);
+            var employees = db.Employees.Include(e => e.Benefit).Include(e => e.Department).
+                Include(e => e.Designation).Include(e => e.Division).Include(e => e.Employee_Type).Include(e => e.Grade).Include(e => e.Section);
             return View(employees.ToList());
         }
 
@@ -76,15 +77,12 @@ namespace MVCFinalProject.Controllers
         // GET: /Employee/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            Employee employee = new Employee();
+            if (id != 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                employee = db.Employees.Find(id);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
+            
             ViewBag.Benefit_ID = new SelectList(db.Benefits, "Benefit_ID", "Benefit_Type", employee.Benefit_ID);
             ViewBag.DID = new SelectList(db.Departments, "DID", "DName", employee.DID);
             ViewBag.DesId = new SelectList(db.Designations, "DesId", "DesName", employee.DesId);
@@ -100,13 +98,25 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="EmpID,Name,Father_Name,Mother_Name,DOB,Gender,Nationality,Maritual_status,Religion,Mobile,Email,Home_phone,Present_address,parmanent_address,DID,DesId,SecID,DivID,Benefit_ID,EmployeeType_ID,GID,Gross_Salary")] Employee employee)
+        public ActionResult Edit([Bind(Include="EmpID,Name,Father_Name,Mother_Name,DOB," +
+            "Gender,Nationality,Maritual_status,Religion,Mobile,Email,Home_phone," +
+            "Present_address,parmanent_address,DID,DesId,SecID,DivID," +
+            "Benefit_ID,EmployeeType_ID,GID,Gross_Salary")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (employee.EmpID==0)
+                {
+                    db.Employees.Add(employee);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    db.Entry(employee).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.Benefit_ID = new SelectList(db.Benefits, "Benefit_ID", "Benefit_Type", employee.Benefit_ID);
             ViewBag.DID = new SelectList(db.Departments, "DID", "DName", employee.DID);
