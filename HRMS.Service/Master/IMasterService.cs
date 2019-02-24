@@ -18,6 +18,7 @@ namespace HRMS.Service.Master
         dynamic Employee_Type(int? id);
         dynamic Grades(int? id);
         dynamic Sections(int? id);
+        dynamic Companies();
 
 
 

@@ -76,7 +76,13 @@ namespace HRMS.Service.Master
             }
             return _Context.Sections.Find(id);
         }
-
+        public dynamic Companies()
+        {
+            //List<CompanyViewModel> cvm = new List<CompanyViewModel>();
+            var company = _Context.Companies.ToList();
+            //Mapper.Map(company, cvm);
+            return company;
+        }
 
         #endregion
     }

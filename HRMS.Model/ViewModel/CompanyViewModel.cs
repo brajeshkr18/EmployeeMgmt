@@ -1,9 +1,8 @@
-
+using System;
+using System.Collections.Generic;
 namespace HRMS.ViewModel
 {
-    using System;
-    using System.Collections.Generic;
-    
+  
     public  class CompanyViewModel
     {
         public CompanyViewModel()
@@ -15,6 +14,6 @@ namespace HRMS.ViewModel
         public string CName { get; set; }
         public string Location { get; set; }
     
-        public virtual List<DivisionViewModel> Divisions { get; set; }
+        public  List<DivisionViewModel> Divisions { get; set; }
     }
 }

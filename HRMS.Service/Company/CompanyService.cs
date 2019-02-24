@@ -20,22 +20,22 @@ namespace HRMS.Service.Company
         #region Public_Methods
 
         
-        public List<CompanyViewModel> CompanyList()
+        public dynamic CompanyList()
         {
-            List<CompanyViewModel> cvm = new List<CompanyViewModel>();
+            //List<CompanyViewModel> cvm = new List<CompanyViewModel>();
             var company = _Context.Companies.ToList();
-            Mapper.Map(company, cvm);
-            return cvm;
+            //Mapper.Map(company, cvm);
+            return company;
         }
-        public CompanyViewModel Company(int? id)
+        public dynamic Company(int? id)
         {
-            CompanyViewModel comp = new CompanyViewModel();
+            HRMS.Core.EntityModel.Company comp = new HRMS.Core.EntityModel.Company();
             try
             {
                 if (id != 0 && id != null)
                 {
-                    HRMS.Core.EntityModel.Company EntComp = _Context.Companies.Find(id);
-                    Mapper.Map(EntComp, comp);
+                    comp = _Context.Companies.Find(id);
+                  //  Mapper.Map(EntComp, comp);
                 }
             }
             catch (Exception EX)

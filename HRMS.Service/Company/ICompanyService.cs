@@ -10,9 +10,9 @@ namespace HRMS.Service.Company
 {
     public interface ICompanyService
     {
-        
-        List<CompanyViewModel> CompanyList();
-        CompanyViewModel Company(int? id);
+
+        dynamic CompanyList();
+        dynamic Company(int? id);
         bool SaveCompany(CompanyViewModel atten);
         bool DeleteCompany(int id);
     }

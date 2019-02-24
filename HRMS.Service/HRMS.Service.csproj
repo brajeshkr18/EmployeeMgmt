@@ -55,6 +55,8 @@
     <Compile Include="Company\ICompanyService.cs" />
     <Compile Include="Department\DepartmentService.cs" />
     <Compile Include="Department\IDepartmentService.cs" />
+    <Compile Include="Division\DivisionService.cs" />
+    <Compile Include="Division\IDivisionService.cs" />
     <Compile Include="Designation\DesignationService.cs" />
     <Compile Include="Designation\IDesignationService.cs" />
     <Compile Include="Benefit\BenefitService.cs" />

@@ -1,187 +1,79 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [MVC4Project]    Script Date: 02/22/2019 7:22:59 AM ******/
-CREATE DATABASE [MVC4Project]
+/****** Object:  Database [EmployeeMGMT]    Script Date: 2/25/2019 12:59:08 AM ******/
+CREATE DATABASE [EmployeeMGMT]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'MVC4Project', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\MVC4Project.mdf' , SIZE = 3264KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'EmployeeMGMT', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\EmployeeMGMT.mdf' , SIZE = 3136KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'MVC4Project_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\MVC4Project_log.ldf' , SIZE = 832KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'EmployeeMGMT_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\EmployeeMGMT_log.ldf' , SIZE = 784KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 GO
-ALTER DATABASE [MVC4Project] SET COMPATIBILITY_LEVEL = 120
+ALTER DATABASE [EmployeeMGMT] SET COMPATIBILITY_LEVEL = 110
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
-EXEC [MVC4Project].[dbo].[sp_fulltext_database] @action = 'enable'
+EXEC [EmployeeMGMT].[dbo].[sp_fulltext_database] @action = 'enable'
 end
 GO
-ALTER DATABASE [MVC4Project] SET ANSI_NULL_DEFAULT OFF 
+ALTER DATABASE [EmployeeMGMT] SET ANSI_NULL_DEFAULT OFF 
 GO
-ALTER DATABASE [MVC4Project] SET ANSI_NULLS OFF 
+ALTER DATABASE [EmployeeMGMT] SET ANSI_NULLS OFF 
 GO
-ALTER DATABASE [MVC4Project] SET ANSI_PADDING OFF 
+ALTER DATABASE [EmployeeMGMT] SET ANSI_PADDING OFF 
 GO
-ALTER DATABASE [MVC4Project] SET ANSI_WARNINGS OFF 
+ALTER DATABASE [EmployeeMGMT] SET ANSI_WARNINGS OFF 
 GO
-ALTER DATABASE [MVC4Project] SET ARITHABORT OFF 
+ALTER DATABASE [EmployeeMGMT] SET ARITHABORT OFF 
 GO
-ALTER DATABASE [MVC4Project] SET AUTO_CLOSE OFF 
+ALTER DATABASE [EmployeeMGMT] SET AUTO_CLOSE OFF 
 GO
-ALTER DATABASE [MVC4Project] SET AUTO_SHRINK OFF 
+ALTER DATABASE [EmployeeMGMT] SET AUTO_SHRINK OFF 
 GO
-ALTER DATABASE [MVC4Project] SET AUTO_UPDATE_STATISTICS ON 
+ALTER DATABASE [EmployeeMGMT] SET AUTO_UPDATE_STATISTICS ON 
 GO
-ALTER DATABASE [MVC4Project] SET CURSOR_CLOSE_ON_COMMIT OFF 
+ALTER DATABASE [EmployeeMGMT] SET CURSOR_CLOSE_ON_COMMIT OFF 
 GO
-ALTER DATABASE [MVC4Project] SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE [EmployeeMGMT] SET CURSOR_DEFAULT  GLOBAL 
 GO
-ALTER DATABASE [MVC4Project] SET CONCAT_NULL_YIELDS_NULL OFF 
+ALTER DATABASE [EmployeeMGMT] SET CONCAT_NULL_YIELDS_NULL OFF 
 GO
-ALTER DATABASE [MVC4Project] SET NUMERIC_ROUNDABORT OFF 
+ALTER DATABASE [EmployeeMGMT] SET NUMERIC_ROUNDABORT OFF 
 GO
-ALTER DATABASE [MVC4Project] SET QUOTED_IDENTIFIER OFF 
+ALTER DATABASE [EmployeeMGMT] SET QUOTED_IDENTIFIER OFF 
 GO
-ALTER DATABASE [MVC4Project] SET RECURSIVE_TRIGGERS OFF 
+ALTER DATABASE [EmployeeMGMT] SET RECURSIVE_TRIGGERS OFF 
 GO
-ALTER DATABASE [MVC4Project] SET  DISABLE_BROKER 
+ALTER DATABASE [EmployeeMGMT] SET  DISABLE_BROKER 
 GO
-ALTER DATABASE [MVC4Project] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+ALTER DATABASE [EmployeeMGMT] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
 GO
-ALTER DATABASE [MVC4Project] SET DATE_CORRELATION_OPTIMIZATION OFF 
+ALTER DATABASE [EmployeeMGMT] SET DATE_CORRELATION_OPTIMIZATION OFF 
 GO
-ALTER DATABASE [MVC4Project] SET TRUSTWORTHY OFF 
+ALTER DATABASE [EmployeeMGMT] SET TRUSTWORTHY OFF 
 GO
-ALTER DATABASE [MVC4Project] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+ALTER DATABASE [EmployeeMGMT] SET ALLOW_SNAPSHOT_ISOLATION OFF 
 GO
-ALTER DATABASE [MVC4Project] SET PARAMETERIZATION SIMPLE 
+ALTER DATABASE [EmployeeMGMT] SET PARAMETERIZATION SIMPLE 
 GO
-ALTER DATABASE [MVC4Project] SET READ_COMMITTED_SNAPSHOT OFF 
+ALTER DATABASE [EmployeeMGMT] SET READ_COMMITTED_SNAPSHOT OFF 
 GO
-ALTER DATABASE [MVC4Project] SET HONOR_BROKER_PRIORITY OFF 
+ALTER DATABASE [EmployeeMGMT] SET HONOR_BROKER_PRIORITY OFF 
 GO
-ALTER DATABASE [MVC4Project] SET RECOVERY FULL 
+ALTER DATABASE [EmployeeMGMT] SET RECOVERY FULL 
 GO
-ALTER DATABASE [MVC4Project] SET  MULTI_USER 
+ALTER DATABASE [EmployeeMGMT] SET  MULTI_USER 
 GO
-ALTER DATABASE [MVC4Project] SET PAGE_VERIFY CHECKSUM  
+ALTER DATABASE [EmployeeMGMT] SET PAGE_VERIFY CHECKSUM  
 GO
-ALTER DATABASE [MVC4Project] SET DB_CHAINING OFF 
+ALTER DATABASE [EmployeeMGMT] SET DB_CHAINING OFF 
 GO
-ALTER DATABASE [MVC4Project] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+ALTER DATABASE [EmployeeMGMT] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
 GO
-ALTER DATABASE [MVC4Project] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+ALTER DATABASE [EmployeeMGMT] SET TARGET_RECOVERY_TIME = 0 SECONDS 
 GO
-ALTER DATABASE [MVC4Project] SET DELAYED_DURABILITY = DISABLED 
+USE [EmployeeMGMT]
 GO
-USE [MVC4Project]
-GO
-/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 02/22/2019 7:23:00 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[__MigrationHistory](
-	[MigrationId] [nvarchar](150) NOT NULL,
-	[ContextKey] [nvarchar](300) NOT NULL,
-	[Model] [varbinary](max) NOT NULL,
-	[ProductVersion] [nvarchar](32) NOT NULL,
- CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED 
-(
-	[MigrationId] ASC,
-	[ContextKey] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 02/22/2019 7:23:00 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[AspNetRoles](
-	[Id] [nvarchar](128) NOT NULL,
-	[Name] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 02/22/2019 7:23:00 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[AspNetUserClaims](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ClaimType] [nvarchar](max) NULL,
-	[ClaimValue] [nvarchar](max) NULL,
-	[User_Id] [nvarchar](128) NOT NULL,
- CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 02/22/2019 7:23:00 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[AspNetUserLogins](
-	[UserId] [nvarchar](128) NOT NULL,
-	[LoginProvider] [nvarchar](128) NOT NULL,
-	[ProviderKey] [nvarchar](128) NOT NULL,
- CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED 
-(
-	[UserId] ASC,
-	[LoginProvider] ASC,
-	[ProviderKey] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 02/22/2019 7:23:00 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[AspNetUserRoles](
-	[UserId] [nvarchar](128) NOT NULL,
-	[RoleId] [nvarchar](128) NOT NULL,
- CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED 
-(
-	[UserId] ASC,
-	[RoleId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 02/22/2019 7:23:00 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[AspNetUsers](
-	[Id] [nvarchar](128) NOT NULL,
-	[UserName] [nvarchar](max) NULL,
-	[PasswordHash] [nvarchar](max) NULL,
-	[SecurityStamp] [nvarchar](max) NULL,
-	[Discriminator] [nvarchar](128) NOT NULL,
- CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[Attendence]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Attendence]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -206,7 +98,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Benefit]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Benefit]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,7 +117,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Company]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Company]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +137,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Department]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Department]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -264,7 +156,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Designation]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Designation]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -283,7 +175,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Division]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Division]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -304,7 +196,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Employee]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Employee]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -343,7 +235,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Employee_Type]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Employee_Type]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -362,7 +254,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Grade]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Grade]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -382,7 +274,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Promotion]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Promotion]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -411,7 +303,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[SalaryHead]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[SalaryHead]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -432,7 +324,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[SalaryHistory]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[SalaryHistory]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,7 +347,7 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Section]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Section]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -474,7 +366,7 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Transfer_Info]    Script Date: 02/22/2019 7:23:00 AM ******/
+/****** Object:  Table [dbo].[Transfer_Info]    Script Date: 2/25/2019 12:59:10 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -503,14 +395,107 @@ PRIMARY KEY CLUSTERED
 GO
 SET ANSI_PADDING OFF
 GO
-INSERT [dbo].[__MigrationHistory] ([MigrationId], [ContextKey], [Model], [ProductVersion]) VALUES (N'201902211247294_InitialCreate', N'MVCFinalProject.Models.ApplicationDbContext', 0x1F8B0800000000000400DD5CDB72DB36107DEF4CFF81C3A7A433116DE725CD48C938B2DD7A1AD999C8C96B062621192D09B204E4C8DFD6877E527FA100EF242E042FBA382F1E895CEC2E760F16B723FFF7CFBFD3F7DBC0B71E614C508867F6E9E4C4B62076430FE1F5CCDED0D5AB37F6FB773FFF34BDF482ADF535977BCDE5584B4C66F603A5D15BC721EE030C009904C88D4312AEE8C40D030778A1737672F2AB737AEA40A6C266BA2C6BFA7983290A60F2857D9D87D88511DD007F117AD027D973F6669968B56E400049045C38B3175FE7570803FF531CFE095D3A495BD8D6B98F00F36609FD956D018C430A28F3F5ED170297340EF17A19B107C0BF7B8A20935B019FC0AC0F6F4B71D3EE9C9CF1EE3865C35EE1B08B8EB2AE5EB290D027EE5ED2DD997DEDC1E4D1E7D087554926FB077CAA3D608F583C22183369B82ADADB96536FE7341B16CD2A6DB80B2C90346618B0AD05D87E84784D1F183ACEDED8D615DA422F7F9245F10B460C32AC118D37ECEBCDC6F7C1BD0F8BF78ED626FFABB1CA3E0EB73A75CAF06A837E1E453E72939432E4C4B6F5011098F9C6A035C99392BE748C12C865E73E40C1FEB3788DE9EB33496C2A036449C318FE06318C0185DE2740298C71E97C5BF6928E716323A4D0C0D257E06F7660EA063CA275128F86D134CF9FA19FBC240F28920021F1EC5B2A7A1587011FB192F42712DF96E12676791742ADD81D88D790F644710DA53F70E9E0FD1BA97CE80D7D02847C0F63EF77401E766E6C09DD4DCCB2B7A42088F688F5047D645CB4E7306E417B3E284C5DFD18AE116E773511D3BA5A4A685DAD887575952B6BF7944B691D2D04B47E965232377BD58FA4EB7D8A086F2C1612A96862833D7E445E735A55B4C8859927DD4B55EED9BECB55A39BFB365F8BD9CE8D0F9B523B8D5CDD942A19E0838744DF15798711C14DF499850F05EDDCDFC3C12A498A51994D25356536F9A303552925C3D460F077980C5ABDEC8CFC7342421725EEA966836F9275E525F62CB3412ADF4CA5D38CB5D8F814F12D187B3CB37F1102DB6AA6981D557BB6BA8553BB39166FF105F42185D6B99B9E08CC017181272291C5CFAB3F61C317C6DC16F0E72CB93406085371AC23ECA208F846FD68B4365CAD73EF0A3BCD37173082981B35CA978903CABAE614B61AA16B8BD4D4A9C0D01C9DE5F036418D64ACCB4193168C7ED0144B85C488CCC0712153E8C69E8129E4CAC4BE7C123D142E8D8BA6A4BAEF0897CFBF620ADD38042E9F6DBDAC6CE54D30233BC59283263DEEEC094DD9F1C1BEB1A90C68BA686249A02C0530168F8D2FEEF94BB8A5424879C325A4F573817211269D138480D5950861D369AC24A683DA368D9D94E5E7365A8DD952B083DAB65896C5B2A1B492648DC3D95ABC22ACDFB1364168BC362EFA288F9A502F8C57C30AC582CE1AEC9978C76855B657FA6029166A1D966A8A1E6548308C94B838ABA895AA1A2340266852AC183AAC19C60BD02190543D64D6474A35877599C5149DCA2BAA61B024F3D608D1CAF7E9C59453DE8E3BE9F5787E8DEE28EED1A70B104508AF2BF7EAD9136B995EAACF5F2DBB5F6007A90EC725927BECC2DBC2120D63B0868DB7CC34F3F40AC5845E000AEE013FF1997B8120D66582CD4D56E7593183F954914BF3CF690B39C5A03E318BCBBC4CCF15EB65C0D78AC9BDAA24FFF2E616E73A001FC4925BB579E86F02AC5EBAAA5BA77763D5F6E91351C3D469F82F2C4D858809EBA77AF88D92531F142324A9797FDF3F4FF2E683F3C4B0EBA164399E5C654B180755351788B8310A58479997BBC85B4B94AF09FF7CBB7AD13226B8E72F8F2FD8D2D6DC963830CAA7E69AEAB7C2556DF537E61A1B57BF55958D577B878201028E0F00C268ABEF5CF63AD4462891D98264E4B449B8499D73A7D0B19B115CE11C5595541E77D495B18A0465D9F3A3C442B6291C190B92DBFECE5850E8D0D5E3261E5427646A2D8DBBF5AAB21676815A67EDC2BC56DED5EC832341C7E8AB5EF9BD77676C745BFD8E038DFC1AA0AA457535B0FBE4D5377A2DB53EDB01772FE759C3CE259B6F6D855AADDBE28AF1332AF8890AF91978C583DECE290FE37BCF466ABF9A7B7731EBC216BE295260AED8CA37B6ECD36CFBDCCE8F17F6D3A9886DE5358BAD249F0885C1840B4C967FFB731FB11896020B80D10A127A17FE05F1CC3E3B393D6BD0EB7B50DD1D423CFF98F9EEF811C4EE038845D2CA003A7BAEF44500B62FC7A2A81F96DC3B5A9CCA0D574BACFAF273072994727007696CEC2F0645B317560EF41304C46B4BEB8F0C3A8247F8D5C1A0D488BF2C18A4AE98DBF69FE31F9EAC3B5AF991727147D32EA1DAEE1306CF86A03A5AC0EBFCD391633D2A25F230441BCD4DF1504AE6600ECF41488ECF8BA8634E6C4C6FDF0FC13154DF200F24B00D0298E2CC62E7A4B01F99A0784C25ECD0F83A440133C6D7D1D4AF8E44C3630258C6981B46747C761053DD09C931A638C91B1D648D63B47CFB26504814C7E5B283A63602667A7C36B3BDFB9081205D3A9E93E80652393F4C652C45AFD258765CAB3426670DE98C65C8D45ACC64F466E52CA8769AA719CB536F5BCE7C6CE5821A5141F596E5D93D245F54C926EB460CD5B34C9F0321B49A61915AD585DAA865493E17EAE7705CEC3B143B24770E0F46AD6E2A2ECD76C2DE14AF78D84C59F947496CBE26685DAAE0E4160CDDDA1C59C85CE35598CFD50D8F7291C609CA0252E0B109F43CA668055CCA5EBB9090E477BC1979E632B887DE35BEDDD0684359976170EFD74EF4F894AFB39F5054EB3E4F6FA3E497B0637481B9895817E02DFEB041BE57F87D2539EA51A8E06B89EC9C9AE792F2F3EAF553A1E926C4868AB2F0154BA03B18443E53466EF1123C42B56FED31AC476C7A81C03A0601C97494EDD957063F2FD8BEFB1FEA945D6FEA4B0000, N'6.0.0-20911')
+/****** Object:  Table [dbo].[User]    Script Date: 2/25/2019 12:59:10 AM ******/
+SET ANSI_NULLS ON
 GO
-INSERT [dbo].[AspNetUsers] ([Id], [UserName], [PasswordHash], [SecurityStamp], [Discriminator]) VALUES (N'43fc02ac-fe98-4580-b062-4ebac8514fc1', N'admin', N'AIV8i5hk4Zeu0Lzc8R5NgSzLYyLKHJqRrPV7mDduztNeBbo/Udf1BWY5KZoQ3tsJ8A==', N'782bf1e9-1790-473e-93ec-5dcbbaacf3d2', N'ApplicationUser')
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[User](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserTypeId] [bigint] NOT NULL,
+	[FirstName] [nvarchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+	[PhoneNumber] [varchar](50) NULL,
+	[WorkPhone] [varchar](50) NULL,
+	[UserName] [nvarchar](100) NULL,
+	[SaltKey] [nvarchar](50) NULL,
+	[PasswordHash] [nvarchar](250) NULL,
+	[DefaultPassword] [bit] NULL,
+	[LastLoginDate] [datetime] NULL,
+	[IsOnLine] [bit] NULL,
+	[AccountStatus] [int] NULL,
+	[ReportingTo] [bigint] NULL,
+	[CreatedBy] [bigint] NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[ModifiedBy] [bigint] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[IsActive] [bit] NOT NULL,
+	[IsDeleted] [bit] NOT NULL,
+	[AssignedRegionId] [bigint] NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserDetail]    Script Date: 2/25/2019 12:59:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[UserDetail](
+	[Id] [bigint] NOT NULL,
+	[DateOfBirth] [datetime] NULL,
+	[Gender] [int] NULL,
+	[CurCountry] [int] NULL,
+	[CurState] [int] NULL,
+	[CurCity] [int] NULL,
+	[CurZipCode] [varchar](50) NULL,
+	[CurAddress1] [varchar](700) NULL,
+	[CurAddress2] [varchar](700) NULL,
+	[PerCountry] [int] NULL,
+	[PerState] [int] NULL,
+	[PerCity] [int] NULL,
+	[PerZipCode] [varchar](50) NULL,
+	[PerAddress1] [varchar](700) NULL,
+	[PerAddress2] [varchar](700) NULL,
+	[CostPerMile] [float] NULL,
+	[CostPerMinute] [float] NULL,
+ CONSTRAINT [PK_UserDetail] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserType]    Script Date: 2/25/2019 12:59:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[UserType](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Code] [varchar](10) NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_UserType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
 GO
 SET IDENTITY_INSERT [dbo].[Attendence] ON 
 
 GO
-INSERT [dbo].[Attendence] ([ID], [InTime], [OutTime], [InTime_Lanch], [OutTime_Lanch], [Attend_Date], [Statuss], [EmpID]) VALUES (1, N'10:00:am', N'04:00:pm', N'02:00:pm', N'03:00', CAST(N'2018-02-02 00:00:00.000' AS DateTime), N'Active', NULL)
+INSERT [dbo].[Attendence] ([ID], [InTime], [OutTime], [InTime_Lanch], [OutTime_Lanch], [Attend_Date], [Statuss], [EmpID]) VALUES (1, N'10:00:am', N'04:00:pm', N'02:00:pm', N'03:00', CAST(N'2018-02-02 00:00:00.000' AS DateTime), N'Active', 1)
+GO
+INSERT [dbo].[Attendence] ([ID], [InTime], [OutTime], [InTime_Lanch], [OutTime_Lanch], [Attend_Date], [Statuss], [EmpID]) VALUES (2, N'10:00:am', N'10:00:am', N'10:00:am', N'10:00:am', CAST(N'2018-02-02 00:00:00.000' AS DateTime), N'1', 2)
 GO
 SET IDENTITY_INSERT [dbo].[Attendence] OFF
 GO
@@ -570,9 +555,11 @@ GO
 SET IDENTITY_INSERT [dbo].[Employee] ON 
 
 GO
-INSERT [dbo].[Employee] ([EmpID], [Name], [Father_Name], [Mother_Name], [DOB], [Gender], [Nationality], [Maritual_status], [Religion], [Mobile], [Email], [Home_phone], [Present_address], [parmanent_address], [DID], [DesId], [SecID], [DivID], [Benefit_ID], [EmployeeType_ID], [GID], [Gross_Salary]) VALUES (1, N'MD.Rahim', N'MD.Karim', N'Mrs.Salma', CAST(N'1985-01-01 00:00:00.000' AS DateTime), N'Male', N'Bangladeshi', N'Married', N'Islam', N'01712654789', N'rahim@gmail.com', N'0298745', N'Uttara,Dhaka', N'Dhaka', 1, 1, 1, 1, 1, 1, 1, 85000)
+INSERT [dbo].[Employee] ([EmpID], [Name], [Father_Name], [Mother_Name], [DOB], [Gender], [Nationality], [Maritual_status], [Religion], [Mobile], [Email], [Home_phone], [Present_address], [parmanent_address], [DID], [DesId], [SecID], [DivID], [Benefit_ID], [EmployeeType_ID], [GID], [Gross_Salary]) VALUES (1, N'brajesh', N'brajesh', N'brajesh', CAST(N'2019-02-27 00:00:00.000' AS DateTime), N'Male', N'India', N'Married', N'Hindu', N'01712654789', N'x@gmail.com', N'0298745', N'Noida', N'Noida', 1, 1, 1, 1, 1, 1, 1, 85000)
 GO
-INSERT [dbo].[Employee] ([EmpID], [Name], [Father_Name], [Mother_Name], [DOB], [Gender], [Nationality], [Maritual_status], [Religion], [Mobile], [Email], [Home_phone], [Present_address], [parmanent_address], [DID], [DesId], [SecID], [DivID], [Benefit_ID], [EmployeeType_ID], [GID], [Gross_Salary]) VALUES (2, N'Miss.Rahima', N'MD.Kamal', N'Mrs.Sumi', CAST(N'1990-01-05 00:00:00.000' AS DateTime), N'Female', N'Bangladeshi', N'Unmarried', N'Islam', N'01762458712', N'rahima@gmail.com', N'0426578', N'Banini,Dhaka', N'Chittagong', 2, 2, 2, 2, 2, 2, 2, 65000)
+INSERT [dbo].[Employee] ([EmpID], [Name], [Father_Name], [Mother_Name], [DOB], [Gender], [Nationality], [Maritual_status], [Religion], [Mobile], [Email], [Home_phone], [Present_address], [parmanent_address], [DID], [DesId], [SecID], [DivID], [Benefit_ID], [EmployeeType_ID], [GID], [Gross_Salary]) VALUES (2, N'Raj', N'Kumar', N'Sun', CAST(N'1990-01-05 00:00:00.000' AS DateTime), N'Male', N'India', N'Unmarried', N'Hindu', N'01762458712', N'raj@gmail.com', N'0426578', N'India Delhi', N'Chittagong', 2, 2, 2, 2, 1, 2, 2, 65000)
+GO
+INSERT [dbo].[Employee] ([EmpID], [Name], [Father_Name], [Mother_Name], [DOB], [Gender], [Nationality], [Maritual_status], [Religion], [Mobile], [Email], [Home_phone], [Present_address], [parmanent_address], [DID], [DesId], [SecID], [DivID], [Benefit_ID], [EmployeeType_ID], [GID], [Gross_Salary]) VALUES (6, N'Hello', N'Kumar', N'Sun', CAST(N'2019-02-27 00:00:00.000' AS DateTime), N'Male', N'India', N'Unmarried', N'Hindu', N'01762458712', N'raj@gmail.com', N'0426578', N'Noida', N'Noida', 1, 4, 3, 3, 1, 2, 2, 65000)
 GO
 SET IDENTITY_INSERT [dbo].[Employee] OFF
 GO
@@ -623,65 +610,32 @@ INSERT [dbo].[Section] ([SecID], [Section_Name]) VALUES (4, N'D')
 GO
 SET IDENTITY_INSERT [dbo].[Section] OFF
 GO
-SET ANSI_PADDING ON
+SET IDENTITY_INSERT [dbo].[Transfer_Info] ON 
 
 GO
-/****** Object:  Index [IX_User_Id]    Script Date: 02/22/2019 7:23:00 AM ******/
-CREATE NONCLUSTERED INDEX [IX_User_Id] ON [dbo].[AspNetUserClaims]
-(
-	[User_Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+INSERT [dbo].[Transfer_Info] ([TransferID], [EmpID], [OldDepartment], [NewDepartment], [OldDivision], [NewDivision], [OldSection], [NewSection], [TransferActiveDate], [TransferDate], [Remark], [StatusState]) VALUES (1, 1, N'Edit', N'Edit', N'Edit', N'Edit', N'Edit', N'Edit', CAST(N'2019-02-27 00:00:00.000' AS DateTime), CAST(N'2019-02-27 00:00:00.000' AS DateTime), N'Edit', N'Edit')
 GO
-SET ANSI_PADDING ON
+SET IDENTITY_INSERT [dbo].[Transfer_Info] OFF
+GO
+SET IDENTITY_INSERT [dbo].[User] ON 
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 02/22/2019 7:23:00 AM ******/
-CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
-(
-	[UserId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+INSERT [dbo].[User] ([Id], [UserTypeId], [FirstName], [LastName], [Email], [PhoneNumber], [WorkPhone], [UserName], [SaltKey], [PasswordHash], [DefaultPassword], [LastLoginDate], [IsOnLine], [AccountStatus], [ReportingTo], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted], [AssignedRegionId]) VALUES (1, 1, N'Brajesh', N'Kumar', N'Admin@Ems.com', NULL, NULL, NULL, NULL, N'73acd9a5972130b75066c82595a1fae3', 0, CAST(N'2018-08-06 00:42:07.467' AS DateTime), 1, 1, NULL, NULL, CAST(N'2018-01-31 23:40:11.900' AS DateTime), NULL, NULL, 1, 0, NULL)
 GO
-SET ANSI_PADDING ON
+INSERT [dbo].[User] ([Id], [UserTypeId], [FirstName], [LastName], [Email], [PhoneNumber], [WorkPhone], [UserName], [SaltKey], [PasswordHash], [DefaultPassword], [LastLoginDate], [IsOnLine], [AccountStatus], [ReportingTo], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted], [AssignedRegionId]) VALUES (2, 2, N'Employee', N'Employee', N'brajes@Ems.com', N'9026457896', NULL, NULL, NULL, N'73acd9a5972130b75066c82595a1fae3', 0, CAST(N'2018-01-31 23:43:33.280' AS DateTime), 1, 1, 1, 1, CAST(N'2018-01-31 23:42:06.370' AS DateTime), 1, CAST(N'2018-06-06 14:56:47.337' AS DateTime), 1, 0, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[User] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserType] ON 
 
 GO
-/****** Object:  Index [IX_RoleId]    Script Date: 02/22/2019 7:23:00 AM ******/
-CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
-(
-	[RoleId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+INSERT [dbo].[UserType] ([Id], [Name], [Code], [CreatedOn], [IsActive]) VALUES (1, N'Admin', N'Admin', CAST(N'2018-01-31 23:40:11.807' AS DateTime), 1)
 GO
-SET ANSI_PADDING ON
-
+INSERT [dbo].[UserType] ([Id], [Name], [Code], [CreatedOn], [IsActive]) VALUES (2, N'SuperAdmin', N'SuperAdmin', CAST(N'2018-01-31 23:40:11.883' AS DateTime), 1)
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 02/22/2019 7:23:00 AM ******/
-CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
-(
-	[UserId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+INSERT [dbo].[UserType] ([Id], [Name], [Code], [CreatedOn], [IsActive]) VALUES (3, N'Employee', N'Employee', CAST(N'2018-01-31 23:40:11.807' AS DateTime), 1)
 GO
-ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_User_Id] FOREIGN KEY([User_Id])
-REFERENCES [dbo].[AspNetUsers] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[AspNetUserClaims] CHECK CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_User_Id]
-GO
-ALTER TABLE [dbo].[AspNetUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
-REFERENCES [dbo].[AspNetUsers] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[AspNetUserLogins] CHECK CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]
-GO
-ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY([RoleId])
-REFERENCES [dbo].[AspNetRoles] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]
-GO
-ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
-REFERENCES [dbo].[AspNetUsers] ([Id])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
+SET IDENTITY_INSERT [dbo].[UserType] OFF
 GO
 ALTER TABLE [dbo].[Attendence]  WITH CHECK ADD FOREIGN KEY([EmpID])
 REFERENCES [dbo].[Employee] ([EmpID])
@@ -722,7 +676,102 @@ GO
 ALTER TABLE [dbo].[Transfer_Info]  WITH CHECK ADD FOREIGN KEY([EmpID])
 REFERENCES [dbo].[Employee] ([EmpID])
 GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK__UserTypeId__UserType__Id] FOREIGN KEY([UserTypeId])
+REFERENCES [dbo].[UserType] ([Id])
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK__UserTypeId__UserType__Id]
+GO
+ALTER TABLE [dbo].[UserDetail]  WITH CHECK ADD  CONSTRAINT [FK__UserDetail__User__Id] FOREIGN KEY([Id])
+REFERENCES [dbo].[User] ([Id])
+GO
+ALTER TABLE [dbo].[UserDetail] CHECK CONSTRAINT [FK__UserDetail__User__Id]
+GO
+/****** Object:  StoredProcedure [dbo].[spGetUsers]    Script Date: 2/25/2019 12:59:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+CREATE PROCEDURE [dbo].[spGetUsers]    
+
+    
+AS 
+    BEGIN
+
+
+/* Build the Transact-SQL String with the input parameters */ 
+
+CREATE table #UserTemp(
+	[Id] [bigint] NOT NULL,
+	[UserTypeId] bigint NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+	[PhoneNumber] [nvarchar](50) NULL,
+	[UserName] [nvarchar](100)  NULL,
+	[AccountStatus] int NULL,
+	[PasswordHash] [nvarchar](max)  NULL,
+	[IsOnLine] bit ,
+	[LastLoginDate] datetime null
+)
+
+		  insert into #UserTemp ([Id],
+											[UserTypeId],
+											[FirstName],
+											[LastName],
+											[Email],
+											[PhoneNumber],
+											[UserName],
+											[AccountStatus],
+											[PasswordHash],
+											[IsOnLine],
+											[LastLoginDate]
+											)
+		    select u.[Id],
+											u.[UserTypeId],
+											u.[FirstName],
+											u.[LastName],
+											u.[Email],
+											u.[PhoneNumber],
+											u.[UserName],
+											u.[AccountStatus],
+											u.[PasswordHash],
+											u.[IsOnLine],
+											u.[LastLoginDate] 
+											--vehicle.[RegistrationNo],
+											--vehicle.[InsuranceNo]
+											 from [User] u
+			--inner join dbo.VehicleAllocation vehAllo on u.id=vehAllo.UserId and vehAllo.IsActive= 1 AND vehAllo.IsDeleted <> 1
+			--inner join dbo.Vehicles vehicle on vehAllo.VehicleId=vehicle.Id and vehicle.IsActive= 1 AND u.IsDeleted <> 1
+			WHERE u.IsActive= 1 AND u.IsDeleted <> 1
+
+		  BEGIN
+			
+		
+
+Select * from #UserTemp As userData Where 1=1
+--AND (ISNULL(@Email,space(0)) = space(0) OR  userData.Email  = @Email )
+--AND (ISNULL(@AccountStatus,0) = 0 OR  userData.AccountStatus  = @AccountStatus)
+--AND (ISNULL(@UserTypeId,Space(0)) = Space(0) OR  userData.UserTypeId in(SELECT Id FROM [dbo].[fnSplitValues](@UserTypeId)))
+--AND (ISNULL(@Name,space(0)) = space(0) OR  (rtrim(ltrim(userData.FirstName)) like '%' + @Name + '%' or rtrim(ltrim(userData.LastName)) like '%' + @Name + '%' or rtrim(ltrim(userData.FirstName)) + SPACE(1) + rtrim(ltrim(userData.LastName)) like '%' + @name + '%' ) )
+
+		--/* check for the condition and build the WHERE clause accordingly */	
+		End
+
+
+		End
+
+
+
+
+
+
+GO
 USE [master]
 GO
-ALTER DATABASE [MVC4Project] SET  READ_WRITE 
+ALTER DATABASE [EmployeeMGMT] SET  READ_WRITE 
 GO
