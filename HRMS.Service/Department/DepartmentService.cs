@@ -21,50 +21,47 @@ namespace HRMS.Service.Department
         #region Public_Methods
 
         
-        public dynamic AttendenceList()
+        public List<DepartmentViewModel> DepartmentList()
         {
-            var attendences = _Context.Attendences.Include(a => a.Employee);
-            return attendences.ToList();
+            List<DepartmentViewModel> dep = new List<DepartmentViewModel>();
+            var dept = _Context.Departments.ToList();
+            Mapper.Map(dept, dep);
+            return dep;
         }
-        public AttendenceViewModel Attendence(int? id)
+        public DepartmentViewModel Department(int? id)
         {
-            AttendenceViewModel avm = new AttendenceViewModel();
+            DepartmentViewModel comp = new DepartmentViewModel();
             try
             {
                 if (id != 0 && id != null)
                 {
-                    Attendence attendence = _Context.Attendences.Find(id);
-                    Mapper.Map(attendence, avm);
+                    HRMS.Core.EntityModel.Department EntComp = _Context.Departments.Find(id);
+                    Mapper.Map(EntComp, comp);
                 }
             }
             catch (Exception EX)
             {
 
             }
-            return avm;
+            return comp;
         }
-        public dynamic EmployeeList()
+        public bool SaveDepartment(DepartmentViewModel dept)
         {
-            var employees = _Context.Employees;
-            return employees;
-        }
-        public bool SaveAttendence(HRMS.ViewModel.AttendenceViewModel atten)
-        {
-            HRMS.Core.EntityModel.Attendence tblattend = new HRMS.Core.EntityModel.Attendence();
+            HRMS.Core.EntityModel.Department tblDepartment = new HRMS.Core.EntityModel.Department();
             bool result = false;
             try
             {
-                if (atten.ID == 0)
+                if (dept.DID == 0)
                 {
-                    Mapper.Map(atten, tblattend);
-                    _Context.Attendences.Add(tblattend);
+                    Mapper.Map(dept, tblDepartment);
+                    _Context.Departments.Add(tblDepartment);
                     _Context.SaveChanges();
                     result = true;
                 }
                 else
                 {
-                    Mapper.Map(atten, tblattend);
-                    _Context.Entry(tblattend).State = EntityState.Modified;
+                    Mapper.Map(dept, tblDepartment);
+                    _Context.Entry(tblDepartment).State = EntityState.Modified;
                     _Context.SaveChanges();
                     result = true;
                 }
@@ -73,14 +70,15 @@ namespace HRMS.Service.Department
             {
                 result = false;
             }
-           return result;
+            return result;
         }
-        public bool DeleteAttendence(int id)
+        public bool DeleteDepartment(int id)
         {
             try
             {
-                HRMS.Core.EntityModel.Attendence attendence = _Context.Attendences.Find(id);
-                _Context.Attendences.Remove(attendence); ;
+
+                HRMS.Core.EntityModel.Company comp = _Context.Companies.Find(id);
+                _Context.Companies.Remove(comp); ;
                 _Context.SaveChanges();
                 return true;
             }
@@ -88,7 +86,7 @@ namespace HRMS.Service.Department
             {
                 return false;
             }
-            
+
         }
         #endregion
     }

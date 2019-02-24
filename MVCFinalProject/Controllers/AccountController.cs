@@ -42,7 +42,7 @@ namespace HRMS.Controllers
             //    if (myJsonResult.data != null)
             //        return View(new LoginViewModel { Email = myJsonResult.data.ToString() });
             //}
-            return View();
+          //  return View();
         }
 
         //

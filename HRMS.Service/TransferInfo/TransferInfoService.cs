@@ -7,34 +7,33 @@ using System.Linq;
 using HRMS.Core.EntityModel;
 using HRMS.ViewModel.Model.Users;
 using HRMS.ViewModel;
-using HRMS.Model.Users;
 using HRMSModel.ViewModel;
 using System.Data.Entity;
 
-namespace HRMS.Service.Company
+namespace HRMS.Service.TransferInfo
 {
-    public class CompanyService : ICompanyService
+    public class TransferInfoService : ITransferInfoService
     {
        
         private EmployeeMGMTEntities _Context = new EmployeeMGMTEntities();
         #region Public_Methods
 
         
-        public List<CompanyViewModel> CompanyList()
+        public List<Transfer_InfoViewModel> TransferInfoList()
         {
-            List<CompanyViewModel> cvm = new List<CompanyViewModel>();
-            var company = _Context.Companies.ToList();
-            Mapper.Map(company, cvm);
-            return cvm;
+            List<Transfer_InfoViewModel> transfer = new List<Transfer_InfoViewModel>();
+            var tableTransferInfo = _Context.Transfer_Info.Include(t => t.Employee).ToList();
+            Mapper.Map(tableTransferInfo, transfer);
+            return transfer;
         }
-        public CompanyViewModel Company(int? id)
+        public Transfer_InfoViewModel TransferInfo(int? id)
         {
-            CompanyViewModel comp = new CompanyViewModel();
+            Transfer_InfoViewModel comp = new Transfer_InfoViewModel();
             try
             {
                 if (id != 0 && id != null)
                 {
-                    HRMS.Core.EntityModel.Company EntComp = _Context.Companies.Find(id);
+                    HRMS.Core.EntityModel.Transfer_Info EntComp = _Context.Transfer_Info.Find(id);
                     Mapper.Map(EntComp, comp);
                 }
             }
@@ -44,23 +43,23 @@ namespace HRMS.Service.Company
             }
             return comp;
         }
-        public bool SaveCompany(CompanyViewModel comp)
+        public bool SaveTransferInfo(Transfer_InfoViewModel dept)
         {
-            HRMS.Core.EntityModel.Company tblcompany = new HRMS.Core.EntityModel.Company();
+            HRMS.Core.EntityModel.Transfer_Info tblTransferInfo = new HRMS.Core.EntityModel.Transfer_Info();
             bool result = false;
             try
             {
-                if (comp.CID == 0)
+                if (dept.TransferID == 0)
                 {
-                    Mapper.Map(comp, tblcompany);
-                    _Context.Companies.Add(tblcompany);
+                    Mapper.Map(dept, tblTransferInfo);
+                    _Context.Transfer_Info.Add(tblTransferInfo);
                     _Context.SaveChanges();
                     result = true;
                 }
                 else
                 {
-                    Mapper.Map(comp, tblcompany);
-                    _Context.Entry(tblcompany).State = EntityState.Modified;
+                    Mapper.Map(dept, tblTransferInfo);
+                    _Context.Entry(tblTransferInfo).State = EntityState.Modified;
                     _Context.SaveChanges();
                     result = true;
                 }
@@ -69,15 +68,15 @@ namespace HRMS.Service.Company
             {
                 result = false;
             }
-           return result;
+            return result;
         }
-        public bool DeleteCompany(int id)
+        public bool DeleteTransferInfo(int id)
         {
             try
             {
-               
-                HRMS.Core.EntityModel.Company comp = _Context.Companies.Find(id);
-                _Context.Companies.Remove(comp); ;
+
+                HRMS.Core.EntityModel.Transfer_Info comp = _Context.Transfer_Info.Find(id);
+                _Context.Transfer_Info.Remove(comp); ;
                 _Context.SaveChanges();
                 return true;
             }
@@ -85,7 +84,7 @@ namespace HRMS.Service.Company
             {
                 return false;
             }
-            
+
         }
         #endregion
     }

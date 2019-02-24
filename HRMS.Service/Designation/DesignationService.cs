@@ -21,20 +21,22 @@ namespace HRMS.Service.Designation
         #region Public_Methods
 
         
-        public dynamic AttendenceList()
+        public List<DesignationViewModel> DesignationList()
         {
-            var attendences = _Context.Attendences.Include(a => a.Employee);
-            return attendences.ToList();
+            List<DesignationViewModel> desList = new List<DesignationViewModel>();
+            var Designations = _Context.Designations.ToList();
+            Mapper.Map(Designations, desList);
+            return desList;
         }
-        public AttendenceViewModel Attendence(int? id)
+        public DesignationViewModel Designation(int? id)
         {
-            AttendenceViewModel avm = new AttendenceViewModel();
+            DesignationViewModel avm = new DesignationViewModel();
             try
             {
                 if (id != 0 && id != null)
                 {
-                    Attendence attendence = _Context.Attendences.Find(id);
-                    Mapper.Map(attendence, avm);
+                    HRMS.Core.EntityModel.Designation Designation = _Context.Designations.Find(id);
+                    Mapper.Map(Designation, avm);
                 }
             }
             catch (Exception EX)
@@ -48,16 +50,16 @@ namespace HRMS.Service.Designation
             var employees = _Context.Employees;
             return employees;
         }
-        public bool SaveAttendence(HRMS.ViewModel.AttendenceViewModel atten)
+        public bool SaveDesignation(HRMS.ViewModel.DesignationViewModel atten)
         {
-            HRMS.Core.EntityModel.Attendence tblattend = new HRMS.Core.EntityModel.Attendence();
+            HRMS.Core.EntityModel.Designation tblattend = new HRMS.Core.EntityModel.Designation();
             bool result = false;
             try
             {
-                if (atten.ID == 0)
+                if (atten.DesId == 0)
                 {
                     Mapper.Map(atten, tblattend);
-                    _Context.Attendences.Add(tblattend);
+                    _Context.Designations.Add(tblattend);
                     _Context.SaveChanges();
                     result = true;
                 }
@@ -75,12 +77,12 @@ namespace HRMS.Service.Designation
             }
            return result;
         }
-        public bool DeleteAttendence(int id)
+        public bool DeleteDesignation(int id)
         {
             try
             {
-                HRMS.Core.EntityModel.Attendence attendence = _Context.Attendences.Find(id);
-                _Context.Attendences.Remove(attendence); ;
+                HRMS.Core.EntityModel.Designation Designation = _Context.Designations.Find(id);
+                _Context.Designations.Remove(Designation); ;
                 _Context.SaveChanges();
                 return true;
             }

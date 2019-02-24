@@ -11,11 +11,10 @@ namespace HRMS.Service.Department
 {
     public interface IDepartmentService
     {
-        
-        dynamic AttendenceList();
-        AttendenceViewModel Attendence(int? id);
-        dynamic EmployeeList();
-        bool SaveAttendence(HRMS.ViewModel.AttendenceViewModel atten);
-        bool DeleteAttendence(int id);
+
+        List<DepartmentViewModel> DepartmentList();
+        DepartmentViewModel Department(int? id);
+        bool SaveDepartment(DepartmentViewModel atten);
+        bool DeleteDepartment(int id);
     }
 }

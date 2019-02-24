@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.Department;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
     public class DepartmentController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        IDepartmentService _IDepartMentService = new DepartmentService();
         // GET: /Department/
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            return View(_IDepartMentService.DepartmentList());
         }
 
         // GET: /Department/Details/5
@@ -27,49 +28,23 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            DepartmentViewModel department = _IDepartMentService.Department(id);
             if (department == null)
             {
                 return HttpNotFound();
             }
             return View(department);
         }
-
-        // GET: /Department/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /Department/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="DID,DName")] Department department)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Departments.Add(department);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(department);
-        }
-
+        
         // GET: /Department/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            DepartmentViewModel department = new DepartmentViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                department = _IDepartMentService.Department(id);
             }
-            Department department = db.Departments.Find(id);
-            if (department == null)
-            {
-                return HttpNotFound();
-            }
+            
             return View(department);
         }
 
@@ -78,12 +53,11 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="DID,DName")] Department department)
+        public ActionResult Edit([Bind(Include="DID,DName")] DepartmentViewModel department)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(department).State = EntityState.Modified;
-                db.SaveChanges();
+                _IDepartMentService.SaveDepartment(department);
                 return RedirectToAction("Index");
             }
             return View(department);
@@ -96,7 +70,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            DepartmentViewModel department = _IDepartMentService.Department(id);
             if (department == null)
             {
                 return HttpNotFound();
@@ -109,19 +83,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Department department = db.Departments.Find(id);
-            db.Departments.Remove(department);
-            db.SaveChanges();
+            _IDepartMentService.DeleteDepartment(id);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

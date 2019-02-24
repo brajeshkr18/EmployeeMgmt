@@ -1,6 +1,7 @@
 
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRMS.ViewModel
 {
@@ -13,6 +14,8 @@ namespace HRMS.ViewModel
         }
     
         public int DID { get; set; }
+        [Required]
+        [Display(Name = "Department Name")]
         public string DName { get; set; }
     
         public  List<EmployeeViewModel> Employees { get; set; }

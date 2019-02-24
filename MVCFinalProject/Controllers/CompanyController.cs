@@ -6,18 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.Company;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
     public class CompanyController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
+        ICompanyService _ICompanyService = new CompanyService();
 
         // GET: /Company/
         public ActionResult Index()
         {
-            return View(db.Companies.ToList());
+            return View(_ICompanyService.CompanyList());
         }
 
         // GET: /Company/Details/5
@@ -27,37 +29,14 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
+            CompanyViewModel company = _ICompanyService.Company(id);
             if (company == null)
             {
                 return HttpNotFound();
             }
             return View(company);
         }
-
-        // GET: /Company/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /Company/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="CID,CName,Location")] Company company)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Companies.Add(company);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(company);
-        }
-
+        
         // GET: /Company/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -65,7 +44,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
+            CompanyViewModel company = _ICompanyService.Company(id);
             if (company == null)
             {
                 return HttpNotFound();
@@ -74,16 +53,13 @@ namespace MVCFinalProject.Controllers
         }
 
         // POST: /Company/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="CID,CName,Location")] Company company)
+        public ActionResult Edit(CompanyViewModel company)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(company).State = EntityState.Modified;
-                db.SaveChanges();
+                _ICompanyService.SaveCompany(company);
                 return RedirectToAction("Index");
             }
             return View(company);
@@ -96,7 +72,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = db.Companies.Find(id);
+            CompanyViewModel company = _ICompanyService.Company(id);
             if (company == null)
             {
                 return HttpNotFound();
@@ -109,19 +85,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Company company = db.Companies.Find(id);
-            db.Companies.Remove(company);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            _ICompanyService.DeleteCompany(id);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return RedirectToAction("Index");
         }
     }
 }

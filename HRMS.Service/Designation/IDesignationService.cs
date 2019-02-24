@@ -11,11 +11,11 @@ namespace HRMS.Service.Designation
 {
     public interface IDesignationService
     {
-        
-        dynamic AttendenceList();
-        AttendenceViewModel Attendence(int? id);
+
+        List<DesignationViewModel> DesignationList();
+        DesignationViewModel Designation(int? id);
         dynamic EmployeeList();
-        bool SaveAttendence(HRMS.ViewModel.AttendenceViewModel atten);
-        bool DeleteAttendence(int id);
+        bool SaveDesignation(HRMS.ViewModel.DesignationViewModel atten);
+        bool DeleteDesignation(int id);
     }
 }
