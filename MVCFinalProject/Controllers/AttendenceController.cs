@@ -6,58 +6,37 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.Attendences;
+using HRMS.Utility.Helper;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
+    [HandleError]
+    [CustomAuthorize]
     public class AttendenceController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        IAttendencesService _IAttendencesService = new AttendencesService();
         // GET: /Attendence/
         public ActionResult Index()
-        {
-            var attendences = db.Attendences.Include(a => a.Employee);
-            return View(attendences.ToList());
+        { 
+            var attendences = _IAttendencesService.AttendenceList();
+            return View(attendences);
         }
 
         // GET: /Attendence/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (id == null || id==0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Attendence attendence = db.Attendences.Find(id);
+            HRMS.ViewModel.AttendenceViewModel attendence = _IAttendencesService.Attendence(id);
             if (attendence == null)
             {
                 return HttpNotFound();
             }
-            return View(attendence);
-        }
-
-        // GET: /Attendence/Create
-        public ActionResult Create()
-        {
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name");
-            return View();
-        }
-
-        // POST: /Attendence/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,InTime,OutTime,InTime_Lanch,OutTime_Lanch,Attend_Date,Statuss,EmpID")] Attendence attendence)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Attendences.Add(attendence);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", attendence.EmpID);
             return View(attendence);
         }
 
@@ -68,29 +47,32 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Attendence attendence = db.Attendences.Find(id);
+            //Attendence attendence = db.Attendences.Find(id);
+            var attendence = _IAttendencesService.Attendence(id);
             if (attendence == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", attendence.EmpID);
+            ViewBag.EmpID = new SelectList(_IAttendencesService.EmployeeList(), "EmpID", "Name", attendence.EmpID);
             return View(attendence);
         }
 
         // POST: /Attendence/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,InTime,OutTime,InTime_Lanch,OutTime_Lanch,Attend_Date,Statuss,EmpID")] Attendence attendence)
+        public ActionResult Edit(AttendenceViewModel attendence)
         {
+            
             if (ModelState.IsValid)
             {
-                db.Entry(attendence).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (_IAttendencesService.SaveAttendence(attendence))
+                    return RedirectToAction("Index");
+                else
+                    ModelState.AddModelError("", "Unable to save record ");
+                ViewBag.Background = "alert alert-danger";
             }
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", attendence.EmpID);
+            ViewBag.EmpID = new SelectList(_IAttendencesService.EmployeeList(), "EmpID", "Name", attendence.EmpID);
             return View(attendence);
         }
 
@@ -101,7 +83,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Attendence attendence = db.Attendences.Find(id);
+            AttendenceViewModel attendence = _IAttendencesService.Attendence(id);
             if (attendence == null)
             {
                 return HttpNotFound();
@@ -114,19 +96,11 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Attendence attendence = db.Attendences.Find(id);
-            db.Attendences.Remove(attendence);
-            db.SaveChanges();
+            if(_IAttendencesService.DeleteAttendence(id))
+            return RedirectToAction("Index");
+            else
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

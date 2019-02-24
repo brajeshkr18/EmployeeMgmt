@@ -17,7 +17,7 @@ namespace HRMS.Service.UserService
     public class UserService : IUserService
     {
        
-        private OnBoadTaskEntities _Context = new OnBoadTaskEntities();
+        private EmployeeMGMTEntities _Context = new EmployeeMGMTEntities();
         #region Public_Methods
 
         /// <summary>
@@ -30,37 +30,36 @@ namespace HRMS.Service.UserService
             UserViewModel userviewmodel = new UserViewModel();
             try
             {
-                var user = _Context.Users.Where(item => item.IsDeleted != true &&
-                                                     item.IsActive == true &&
-                                                     item.Email.Equals(loginViewModel.Email.Trim(), StringComparison.InvariantCultureIgnoreCase) &&
-                                                     item.PasswordHash == loginViewModel.PasswordHash).FirstOrDefault();
+                var user = _Context.Database.SqlQuery<UserViewModel>("exec [dbo].[spGetUsers]").ToList().
+                    Where(x=>x.Email==loginViewModel.Email && x.PasswordHash == loginViewModel.PasswordHash).FirstOrDefault();
+                
 
                 if (user != null)
                 {
-                    if (user.DefaultPassword == true)
-                    {
-                        //  throw new CustomException("Account is not activated. Please check your email.");
+                    //if (user.DefaultPassword == true)
+                    //{
+                    //    //  throw new CustomException("Account is not activated. Please check your email.");
 
-                    }
-                    else if (user.AccountStatus == 2) // (int)Utility.Enums.AccountStatus.Inactive)
+                    //}
+                     if (user.AccountStatus == 2) // (int)Utility.Enums.AccountStatus.Inactive)
                     {
-                      //  throw new CustomException("Account is not activated. Please check your email.");
+                        throw new CustomException("Account is not activated. Please check your email.");
 
                     }
                     else if (user.AccountStatus == 3)//(int)Utility.Enums.AccountStatus.Suspended)
                     {
-                      //  throw new CustomException("Account has been suspended. Please contact to administrator.");
+                        throw new CustomException("Account has been suspended. Please contact to administrator.");
                     }
                     else if (user.AccountStatus == 4)//(int)Utility.Enums.AccountStatus.Deactivated)
                     {
-                      //  throw new CustomException("Account has been deactivated. Please contact to administrator.");
+                        throw new CustomException("Account has been deactivated. Please contact to administrator.");
 
                     }
                     else
                     {
                         user.IsOnLine = true;
-                        user.LastLoginDate = DateTime.Now;
-                        _Context.Configuration.ValidateOnSaveEnabled = false;
+                    user.LastLoginDate = DateTime.Now;
+                    _Context.Configuration.ValidateOnSaveEnabled = false;
                         _Context.SaveChanges();
                     }
 
@@ -178,29 +177,11 @@ namespace HRMS.Service.UserService
                     _usrsaltdetails.ModifiedBy = userViewModel.ModifiedBy;
                     _usrsaltdetails.ModifiedOn = DateTime.Now;
 
-                    //if (_usrsaltdetails.UserDetails == null)
-                    //{
-                    //    _usrsaltdetails.UserDetails = new UserDetails();
-                    //}
+                    if (_usrsaltdetails.UserDetail == null)
+                    {
+                        _usrsaltdetails.UserDetail = new UserDetail();
+                    }
 
-
-                    //if (_usrsaltdetails.UserDetails != null)
-                    //{
-                    //    _usrsaltdetails.UserDetails.CurAddress1 = userViewModel.UserDetails.CurAddress1;
-                    //    _usrsaltdetails.UserDetails.CostPerMile = userViewModel.UserDetails.CostPerMile;
-                    //    _usrsaltdetails.UserDetails.CostPerMinute = userViewModel.UserDetails.CostPerMinute;
-                    //}
-                    //Mapper.Map(userViewModel.UserDetails, _usrsaltdetails.UserDetails);
-
-                    //if (_vehicledetails != null)
-                    //{
-                    //    _vehicledetails.RegistrationNo = userViewModel.RegistrationNo;
-                    //    //_vehicledetails.ModelName = userViewModel.ModelName;
-                    //    _vehicledetails.InsuranceNo = userViewModel.InsuranceNo;
-                    //    _vehicledetails.Address1 = userViewModel.Address1;
-                    //    _vehicledetails.PhoneNumber = userViewModel.PhoneNumber;
-                    //    _vehicledetails.Inspectation = userViewModel.Inspectation;
-                    //}
 
                     _Context.Configuration.ValidateOnSaveEnabled = false;
                     _Context.SaveChanges();
@@ -237,15 +218,15 @@ namespace HRMS.Service.UserService
         public UserViewModel GetUsersDetailsById(long UserId)
         {
             UserViewModel useViewModel = new UserViewModel();
-            var user = _Context.Users.Where(x => x.Id == UserId).FirstOrDefault();
-
+            //var user = _Context.Users.Where(x => x.Id == UserId).FirstOrDefault();
+            var user = _Context.Database.SqlQuery<UserViewModel>("exec [dbo].[spGetUsers]").ToList().Where(x => x.Id == UserId).FirstOrDefault();
             if (user != null)
             {
                 Mapper.Map(user, useViewModel);
-                if (user.UserDetail == null)
-                {
-                    user.UserDetail = new UserDetail();
-                }
+                //if (user.UserDetail == null)
+                //{
+                //    user.UserDetail = new UserDetail();
+                //}
                 //else
                 //{
                 //    useViewModel.Address1 = user.UserDetails.CurAddress1;

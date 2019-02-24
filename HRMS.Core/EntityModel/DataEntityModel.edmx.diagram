@@ -4,13 +4,39 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="59c38954b3e64318bbe40b2ea4ad77b5" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="TransportManagementSystemModel.Course" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TransportManagementSystemModel.UserDetail" Width="1.5" PointX="5.25" PointY="1.75" />
-        <EntityTypeShape EntityType="TransportManagementSystemModel.User" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="TransportManagementSystemModel.UserType" Width="1.5" PointX="0.75" PointY="3" />
-        <AssociationConnector Association="TransportManagementSystemModel.FK__UserDetails__Users__Id" />
-        <AssociationConnector Association="TransportManagementSystemModel.FK__UserTypeId__UserType__Id" />
+      <Diagram DiagramId="dc4bf1eb2fd74abe9ba2788d95b56db5" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Attendence" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Benefit" Width="1.5" PointX="3" PointY="18.875" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Company" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Department" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Designation" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Division" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Employee" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Employee_Type" Width="1.5" PointX="3" PointY="14.125" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Grade" Width="1.5" PointX="3" PointY="21.25" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Promotion" Width="1.5" PointX="7.5" PointY="9.125" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.SalaryHead" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.SalaryHistory" Width="1.5" PointX="9.75" PointY="6.5" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Section" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.Transfer_Info" Width="1.5" PointX="7.5" PointY="4.875" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.User" Width="1.5" PointX="12" PointY="11.125" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.UserDetail" Width="1.5" PointX="14.25" PointY="11.625" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.UserType" Width="1.5" PointX="9.75" PointY="12.875" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Attendenc__EmpID__38996AB5" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__Benefi__3A81B327" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Division__CID__398D8EEE" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__DID__3C69FB99" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__DesId__3B75D760" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__DivID__3D5E1FD2" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__Employ__3E52440B" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__GID__3F466844" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Employee__SecID__403A8C7D" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Promotion__EmpID__412EB0B6" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__SalaryHis__EmpID__4222D4EF" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__Transfer___EmpID__440B1D61" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__SalaryHis__Promo__4316F928" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__UserDetail__User__Id" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__UserTypeId__UserType__Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

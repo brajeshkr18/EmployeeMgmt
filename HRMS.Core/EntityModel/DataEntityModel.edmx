@@ -4,38 +4,166 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TransportManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Course">
+    <Schema Namespace="EmployeeMGMTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendence">
           <Key>
-            <PropertyRef Name="CourseID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CourseName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CourseDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InTime" Type="varchar" MaxLength="20" />
+          <Property Name="OutTime" Type="varchar" MaxLength="20" />
+          <Property Name="InTime_Lanch" Type="varchar" MaxLength="20" />
+          <Property Name="OutTime_Lanch" Type="varchar" MaxLength="20" />
+          <Property Name="Attend_Date" Type="datetime" />
+          <Property Name="Statuss" Type="varchar" MaxLength="20" />
+          <Property Name="EmpID" Type="int" />
         </EntityType>
-        <EntityType Name="UserDetails">
+        <EntityType Name="Benefit">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Benefit_ID" />
           </Key>
-          <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="DateOfBirth" Type="datetime" />
-          <Property Name="Gender" Type="int" />
-          <Property Name="CurCountry" Type="int" />
-          <Property Name="CurState" Type="int" />
-          <Property Name="CurCity" Type="int" />
-          <Property Name="CurZipCode" Type="varchar" MaxLength="50" />
-          <Property Name="CurAddress1" Type="varchar" MaxLength="700" />
-          <Property Name="CurAddress2" Type="varchar" MaxLength="700" />
-          <Property Name="PerCountry" Type="int" />
-          <Property Name="PerState" Type="int" />
-          <Property Name="PerCity" Type="int" />
-          <Property Name="PerZipCode" Type="varchar" MaxLength="50" />
-          <Property Name="PerAddress1" Type="varchar" MaxLength="700" />
-          <Property Name="PerAddress2" Type="varchar" MaxLength="700" />
-          <Property Name="CostPerMile" Type="float" />
-          <Property Name="CostPerMinute" Type="float" />
+          <Property Name="Benefit_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Benefit_Type" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Users">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CName" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DID" />
+          </Key>
+          <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesId" />
+          </Key>
+          <Property Name="DesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DesName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="DivID" />
+          </Key>
+          <Property Name="DivID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Division_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="CID" Type="int" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Father_Name" Type="varchar" MaxLength="200" />
+          <Property Name="Mother_Name" Type="varchar" MaxLength="200" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="Nationality" Type="varchar" MaxLength="100" />
+          <Property Name="Maritual_status" Type="varchar" MaxLength="100" />
+          <Property Name="Religion" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="300" />
+          <Property Name="Home_phone" Type="varchar" MaxLength="50" />
+          <Property Name="Present_address" Type="varchar" MaxLength="1000" />
+          <Property Name="parmanent_address" Type="varchar" MaxLength="1000" />
+          <Property Name="DID" Type="int" />
+          <Property Name="DesId" Type="int" />
+          <Property Name="SecID" Type="int" />
+          <Property Name="DivID" Type="int" />
+          <Property Name="Benefit_ID" Type="int" />
+          <Property Name="EmployeeType_ID" Type="int" />
+          <Property Name="GID" Type="int" />
+          <Property Name="Gross_Salary" Type="float" />
+        </EntityType>
+        <EntityType Name="Employee_Type">
+          <Key>
+            <PropertyRef Name="EmployeeType_ID" />
+          </Key>
+          <Property Name="EmployeeType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Types" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Grade_Salary" Type="int" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" />
+          <Property Name="Promotion_type" Type="varchar" MaxLength="100" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="Active_date" Type="datetime" />
+          <Property Name="promotion_active" Type="datetime" />
+          <Property Name="Basics" Type="money" />
+          <Property Name="House_Rent" Type="money" />
+          <Property Name="Medical" Type="money" />
+          <Property Name="Convences" Type="money" />
+          <Property Name="Taxes" Type="money" />
+          <Property Name="Gross_Salary" Type="money" />
+        </EntityType>
+        <EntityType Name="SalaryHead">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Head_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Activity" Type="bit" />
+        </EntityType>
+        <EntityType Name="SalaryHistory">
+          <Key>
+            <PropertyRef Name="SalaryHistoryID" />
+          </Key>
+          <Property Name="SalaryHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" />
+          <Property Name="Dates" Type="datetime" />
+          <Property Name="Basics" Type="money" />
+          <Property Name="HouseRent" Type="money" />
+          <Property Name="Medical" Type="money" />
+          <Property Name="Convences" Type="money" />
+          <Property Name="Taxes" Type="money" />
+          <Property Name="Gross_Salary" Type="money" />
+          <Property Name="PromotionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SecID" />
+          </Key>
+          <Property Name="SecID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Section_Name" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Transfer_Info">
+          <Key>
+            <PropertyRef Name="TransferID" />
+          </Key>
+          <Property Name="TransferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" />
+          <Property Name="OldDepartment" Type="varchar" MaxLength="50" />
+          <Property Name="NewDepartment" Type="varchar" MaxLength="50" />
+          <Property Name="OldDivision" Type="varchar" MaxLength="50" />
+          <Property Name="NewDivision" Type="varchar" MaxLength="50" />
+          <Property Name="OldSection" Type="varchar" MaxLength="50" />
+          <Property Name="NewSection" Type="varchar" MaxLength="50" />
+          <Property Name="TransferActiveDate" Type="datetime" />
+          <Property Name="TransferDate" Type="datetime" />
+          <Property Name="Remark" Type="varchar" MaxLength="50" />
+          <Property Name="StatusState" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -61,9 +189,30 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="AssignedRegionId" Type="bigint" />
-          <Property Name="CountryCode" Type="varchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="UserTypes">
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="CurCountry" Type="int" />
+          <Property Name="CurState" Type="int" />
+          <Property Name="CurCity" Type="int" />
+          <Property Name="CurZipCode" Type="varchar" MaxLength="50" />
+          <Property Name="CurAddress1" Type="varchar" MaxLength="700" />
+          <Property Name="CurAddress2" Type="varchar" MaxLength="700" />
+          <Property Name="PerCountry" Type="int" />
+          <Property Name="PerState" Type="int" />
+          <Property Name="PerCity" Type="int" />
+          <Property Name="PerZipCode" Type="varchar" MaxLength="50" />
+          <Property Name="PerAddress1" Type="varchar" MaxLength="700" />
+          <Property Name="PerAddress2" Type="varchar" MaxLength="700" />
+          <Property Name="CostPerMile" Type="float" />
+          <Property Name="CostPerMinute" Type="float" />
+        </EntityType>
+        <EntityType Name="UserType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -73,92 +222,531 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__UserDetails__Users__Id">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="0..1" />
+        <Association Name="FK__Attendenc__EmpID__38996AB5">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Attendence" Type="Self.Attendence" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Users">
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Attendence">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Division__CID__398D8EEE">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Division" Type="Self.Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="Division">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Benefi__3A81B327">
+          <End Role="Benefit" Type="Self.Benefit" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benefit">
+              <PropertyRef Name="Benefit_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Benefit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__DesId__3B75D760">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__DID__3C69FB99">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__DivID__3D5E1FD2">
+          <End Role="Division" Type="Self.Division" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Division">
+              <PropertyRef Name="DivID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Employ__3E52440B">
+          <End Role="Employee_Type" Type="Self.Employee_Type" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Type">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__GID__3F466844">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="GID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__SecID__403A8C7D">
+          <End Role="Section" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SecID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="SecID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promotion__EmpID__412EB0B6">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalaryHis__EmpID__4222D4EF">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="SalaryHistory" Type="Self.SalaryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="SalaryHistory">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalaryHis__Promo__4316F928">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+          <End Role="SalaryHistory" Type="Self.SalaryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="SalaryHistory">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transfer___EmpID__440B1D61">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Transfer_Info" Type="Self.Transfer_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Transfer_Info">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserDetail__User__Id">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserDetails">
+            <Dependent Role="UserDetail">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserTypeId__UserType__Id">
-          <End Role="UserTypes" Type="Self.UserTypes" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserTypes">
+            <Principal Role="UserType">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Users">
+            <Dependent Role="User">
               <PropertyRef Name="UserTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TransportManagementSystemModelStoreContainer">
-          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__UserDetails__Users__Id" Association="Self.FK__UserDetails__Users__Id">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserDetails" EntitySet="UserDetails" />
+        <EntityContainer Name="EmployeeMGMTModelStoreContainer">
+          <EntitySet Name="Attendence" EntityType="Self.Attendence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Benefit" EntityType="Self.Benefit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_Type" EntityType="Self.Employee_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalaryHead" EntityType="Self.SalaryHead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalaryHistory" EntityType="Self.SalaryHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfer_Info" EntityType="Self.Transfer_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Attendenc__EmpID__38996AB5" Association="Self.FK__Attendenc__EmpID__38996AB5">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Attendence" EntitySet="Attendence" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Division__CID__398D8EEE" Association="Self.FK__Division__CID__398D8EEE">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Division" EntitySet="Division" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Benefi__3A81B327" Association="Self.FK__Employee__Benefi__3A81B327">
+            <End Role="Benefit" EntitySet="Benefit" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__DesId__3B75D760" Association="Self.FK__Employee__DesId__3B75D760">
+            <End Role="Designation" EntitySet="Designation" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__DID__3C69FB99" Association="Self.FK__Employee__DID__3C69FB99">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__DivID__3D5E1FD2" Association="Self.FK__Employee__DivID__3D5E1FD2">
+            <End Role="Division" EntitySet="Division" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Employ__3E52440B" Association="Self.FK__Employee__Employ__3E52440B">
+            <End Role="Employee_Type" EntitySet="Employee_Type" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__GID__3F466844" Association="Self.FK__Employee__GID__3F466844">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__SecID__403A8C7D" Association="Self.FK__Employee__SecID__403A8C7D">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promotion__EmpID__412EB0B6" Association="Self.FK__Promotion__EmpID__412EB0B6">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Promotion" EntitySet="Promotion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalaryHis__EmpID__4222D4EF" Association="Self.FK__SalaryHis__EmpID__4222D4EF">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SalaryHistory" EntitySet="SalaryHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalaryHis__Promo__4316F928" Association="Self.FK__SalaryHis__Promo__4316F928">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="SalaryHistory" EntitySet="SalaryHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transfer___EmpID__440B1D61" Association="Self.FK__Transfer___EmpID__440B1D61">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Transfer_Info" EntitySet="Transfer_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserDetail__User__Id" Association="Self.FK__UserDetail__User__Id">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserDetail" EntitySet="UserDetail" />
           </AssociationSet>
           <AssociationSet Name="FK__UserTypeId__UserType__Id" Association="Self.FK__UserTypeId__UserType__Id">
-            <End Role="UserTypes" EntitySet="UserTypes" />
-            <End Role="Users" EntitySet="Users" />
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TransportManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="OnBoadTaskEntities" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="Courses" EntityType="TransportManagementSystemModel.Course" />
-          <EntitySet Name="UserDetails" EntityType="TransportManagementSystemModel.UserDetail" />
-          <EntitySet Name="Users" EntityType="TransportManagementSystemModel.User" />
-          <EntitySet Name="UserTypes" EntityType="TransportManagementSystemModel.UserType" />
-          <AssociationSet Name="FK__UserDetails__Users__Id" Association="TransportManagementSystemModel.FK__UserDetails__Users__Id">
+      <Schema Namespace="EmployeeMGMTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EmployeeMGMTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendences" EntityType="EmployeeMGMTModel.Attendence" />
+          <EntitySet Name="Benefits" EntityType="EmployeeMGMTModel.Benefit" />
+          <EntitySet Name="Companies" EntityType="EmployeeMGMTModel.Company" />
+          <EntitySet Name="Departments" EntityType="EmployeeMGMTModel.Department" />
+          <EntitySet Name="Designations" EntityType="EmployeeMGMTModel.Designation" />
+          <EntitySet Name="Divisions" EntityType="EmployeeMGMTModel.Division" />
+          <EntitySet Name="Employees" EntityType="EmployeeMGMTModel.Employee" />
+          <EntitySet Name="Employee_Type" EntityType="EmployeeMGMTModel.Employee_Type" />
+          <EntitySet Name="Grades" EntityType="EmployeeMGMTModel.Grade" />
+          <EntitySet Name="Promotions" EntityType="EmployeeMGMTModel.Promotion" />
+          <EntitySet Name="SalaryHeads" EntityType="EmployeeMGMTModel.SalaryHead" />
+          <EntitySet Name="SalaryHistories" EntityType="EmployeeMGMTModel.SalaryHistory" />
+          <EntitySet Name="Sections" EntityType="EmployeeMGMTModel.Section" />
+          <EntitySet Name="Transfer_Info" EntityType="EmployeeMGMTModel.Transfer_Info" />
+          <EntitySet Name="Users" EntityType="EmployeeMGMTModel.User" />
+          <EntitySet Name="UserDetails" EntityType="EmployeeMGMTModel.UserDetail" />
+          <EntitySet Name="UserTypes" EntityType="EmployeeMGMTModel.UserType" />
+          <AssociationSet Name="FK__Attendenc__EmpID__38996AB5" Association="EmployeeMGMTModel.FK__Attendenc__EmpID__38996AB5">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Attendence" EntitySet="Attendences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Benefi__3A81B327" Association="EmployeeMGMTModel.FK__Employee__Benefi__3A81B327">
+            <End Role="Benefit" EntitySet="Benefits" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Division__CID__398D8EEE" Association="EmployeeMGMTModel.FK__Division__CID__398D8EEE">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Division" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__DID__3C69FB99" Association="EmployeeMGMTModel.FK__Employee__DID__3C69FB99">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__DesId__3B75D760" Association="EmployeeMGMTModel.FK__Employee__DesId__3B75D760">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__DivID__3D5E1FD2" Association="EmployeeMGMTModel.FK__Employee__DivID__3D5E1FD2">
+            <End Role="Division" EntitySet="Divisions" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Employ__3E52440B" Association="EmployeeMGMTModel.FK__Employee__Employ__3E52440B">
+            <End Role="Employee_Type" EntitySet="Employee_Type" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__GID__3F466844" Association="EmployeeMGMTModel.FK__Employee__GID__3F466844">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__SecID__403A8C7D" Association="EmployeeMGMTModel.FK__Employee__SecID__403A8C7D">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promotion__EmpID__412EB0B6" Association="EmployeeMGMTModel.FK__Promotion__EmpID__412EB0B6">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalaryHis__EmpID__4222D4EF" Association="EmployeeMGMTModel.FK__SalaryHis__EmpID__4222D4EF">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SalaryHistory" EntitySet="SalaryHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transfer___EmpID__440B1D61" Association="EmployeeMGMTModel.FK__Transfer___EmpID__440B1D61">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Transfer_Info" EntitySet="Transfer_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalaryHis__Promo__4316F928" Association="EmployeeMGMTModel.FK__SalaryHis__Promo__4316F928">
+            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="SalaryHistory" EntitySet="SalaryHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserDetail__User__Id" Association="EmployeeMGMTModel.FK__UserDetail__User__Id">
             <End Role="User" EntitySet="Users" />
             <End Role="UserDetail" EntitySet="UserDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserTypeId__UserType__Id" Association="TransportManagementSystemModel.FK__UserTypeId__UserType__Id">
+          <AssociationSet Name="FK__UserTypeId__UserType__Id" Association="EmployeeMGMTModel.FK__UserTypeId__UserType__Id">
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Course">
+        <EntityType Name="Attendence">
           <Key>
-            <PropertyRef Name="CourseID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CourseDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OutTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="InTime_Lanch" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OutTime_Lanch" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Attend_Date" Type="DateTime" Precision="3" />
+          <Property Name="Statuss" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmpID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="EmployeeMGMTModel.FK__Attendenc__EmpID__38996AB5" FromRole="Attendence" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="UserDetail">
+        <EntityType Name="Benefit">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Benefit_ID" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
-          <Property Name="Gender" Type="Int32" />
-          <Property Name="CurCountry" Type="Int32" />
-          <Property Name="CurState" Type="Int32" />
-          <Property Name="CurCity" Type="Int32" />
-          <Property Name="CurZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CurAddress1" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="CurAddress2" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="PerCountry" Type="Int32" />
-          <Property Name="PerState" Type="Int32" />
-          <Property Name="PerCity" Type="Int32" />
-          <Property Name="PerZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PerAddress1" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="PerAddress2" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="CostPerMile" Type="Double" />
-          <Property Name="CostPerMinute" Type="Double" />
-          <NavigationProperty Name="User" Relationship="TransportManagementSystemModel.FK__UserDetails__Users__Id" FromRole="UserDetail" ToRole="User" />
+          <Property Name="Benefit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Benefit_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__Benefi__3A81B327" FromRole="Benefit" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Divisions" Relationship="EmployeeMGMTModel.FK__Division__CID__398D8EEE" FromRole="Company" ToRole="Division" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DID" />
+          </Key>
+          <Property Name="DID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__DID__3C69FB99" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesId" />
+          </Key>
+          <Property Name="DesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DesName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__DesId__3B75D760" FromRole="Designation" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="DivID" />
+          </Key>
+          <Property Name="DivID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Division_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CID" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="EmployeeMGMTModel.FK__Division__CID__398D8EEE" FromRole="Division" ToRole="Company" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__DivID__3D5E1FD2" FromRole="Division" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Father_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Mother_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Maritual_status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Home_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Present_address" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="parmanent_address" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DID" Type="Int32" />
+          <Property Name="DesId" Type="Int32" />
+          <Property Name="SecID" Type="Int32" />
+          <Property Name="DivID" Type="Int32" />
+          <Property Name="Benefit_ID" Type="Int32" />
+          <Property Name="EmployeeType_ID" Type="Int32" />
+          <Property Name="GID" Type="Int32" />
+          <Property Name="Gross_Salary" Type="Double" />
+          <NavigationProperty Name="Attendences" Relationship="EmployeeMGMTModel.FK__Attendenc__EmpID__38996AB5" FromRole="Employee" ToRole="Attendence" />
+          <NavigationProperty Name="Benefit" Relationship="EmployeeMGMTModel.FK__Employee__Benefi__3A81B327" FromRole="Employee" ToRole="Benefit" />
+          <NavigationProperty Name="Department" Relationship="EmployeeMGMTModel.FK__Employee__DID__3C69FB99" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Designation" Relationship="EmployeeMGMTModel.FK__Employee__DesId__3B75D760" FromRole="Employee" ToRole="Designation" />
+          <NavigationProperty Name="Division" Relationship="EmployeeMGMTModel.FK__Employee__DivID__3D5E1FD2" FromRole="Employee" ToRole="Division" />
+          <NavigationProperty Name="Employee_Type" Relationship="EmployeeMGMTModel.FK__Employee__Employ__3E52440B" FromRole="Employee" ToRole="Employee_Type" />
+          <NavigationProperty Name="Grade" Relationship="EmployeeMGMTModel.FK__Employee__GID__3F466844" FromRole="Employee" ToRole="Grade" />
+          <NavigationProperty Name="Section" Relationship="EmployeeMGMTModel.FK__Employee__SecID__403A8C7D" FromRole="Employee" ToRole="Section" />
+          <NavigationProperty Name="Promotions" Relationship="EmployeeMGMTModel.FK__Promotion__EmpID__412EB0B6" FromRole="Employee" ToRole="Promotion" />
+          <NavigationProperty Name="SalaryHistories" Relationship="EmployeeMGMTModel.FK__SalaryHis__EmpID__4222D4EF" FromRole="Employee" ToRole="SalaryHistory" />
+          <NavigationProperty Name="Transfer_Info" Relationship="EmployeeMGMTModel.FK__Transfer___EmpID__440B1D61" FromRole="Employee" ToRole="Transfer_Info" />
+        </EntityType>
+        <EntityType Name="Employee_Type">
+          <Key>
+            <PropertyRef Name="EmployeeType_ID" />
+          </Key>
+          <Property Name="EmployeeType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Types" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__Employ__3E52440B" FromRole="Employee_Type" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Grade_Salary" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__GID__3F466844" FromRole="Grade" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" />
+          <Property Name="Promotion_type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Active_date" Type="DateTime" Precision="3" />
+          <Property Name="promotion_active" Type="DateTime" Precision="3" />
+          <Property Name="Basics" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="House_Rent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Medical" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Convences" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Taxes" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Gross_Salary" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Employee" Relationship="EmployeeMGMTModel.FK__Promotion__EmpID__412EB0B6" FromRole="Promotion" ToRole="Employee" />
+          <NavigationProperty Name="SalaryHistories" Relationship="EmployeeMGMTModel.FK__SalaryHis__Promo__4316F928" FromRole="Promotion" ToRole="SalaryHistory" />
+        </EntityType>
+        <EntityType Name="SalaryHead">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Head_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Activity" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SalaryHistory">
+          <Key>
+            <PropertyRef Name="SalaryHistoryID" />
+          </Key>
+          <Property Name="SalaryHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" />
+          <Property Name="Dates" Type="DateTime" Precision="3" />
+          <Property Name="Basics" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HouseRent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Medical" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Convences" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Taxes" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Gross_Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PromotionID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="EmployeeMGMTModel.FK__SalaryHis__EmpID__4222D4EF" FromRole="SalaryHistory" ToRole="Employee" />
+          <NavigationProperty Name="Promotion" Relationship="EmployeeMGMTModel.FK__SalaryHis__Promo__4316F928" FromRole="SalaryHistory" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SecID" />
+          </Key>
+          <Property Name="SecID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Section_Name" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employees" Relationship="EmployeeMGMTModel.FK__Employee__SecID__403A8C7D" FromRole="Section" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Transfer_Info">
+          <Key>
+            <PropertyRef Name="TransferID" />
+          </Key>
+          <Property Name="TransferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" />
+          <Property Name="OldDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OldDivision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewDivision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OldSection" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NewSection" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TransferActiveDate" Type="DateTime" Precision="3" />
+          <Property Name="TransferDate" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="EmployeeMGMTModel.FK__Transfer___EmpID__440B1D61" FromRole="Transfer_Info" ToRole="Employee" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -186,9 +774,31 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="AssignedRegionId" Type="Int64" />
-          <Property Name="CountryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserDetail" Relationship="TransportManagementSystemModel.FK__UserDetails__Users__Id" FromRole="User" ToRole="UserDetail" />
-          <NavigationProperty Name="UserType" Relationship="TransportManagementSystemModel.FK__UserTypeId__UserType__Id" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="UserDetail" Relationship="EmployeeMGMTModel.FK__UserDetail__User__Id" FromRole="User" ToRole="UserDetail" />
+          <NavigationProperty Name="UserType" Relationship="EmployeeMGMTModel.FK__UserTypeId__UserType__Id" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="CurCountry" Type="Int32" />
+          <Property Name="CurState" Type="Int32" />
+          <Property Name="CurCity" Type="Int32" />
+          <Property Name="CurZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurAddress1" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="CurAddress2" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="PerCountry" Type="Int32" />
+          <Property Name="PerState" Type="Int32" />
+          <Property Name="PerCity" Type="Int32" />
+          <Property Name="PerZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerAddress1" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="PerAddress2" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="CostPerMile" Type="Double" />
+          <Property Name="CostPerMinute" Type="Double" />
+          <NavigationProperty Name="User" Relationship="EmployeeMGMTModel.FK__UserDetail__User__Id" FromRole="UserDetail" ToRole="User" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -199,11 +809,167 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="TransportManagementSystemModel.FK__UserTypeId__UserType__Id" FromRole="UserType" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="EmployeeMGMTModel.FK__UserTypeId__UserType__Id" FromRole="UserType" ToRole="User" />
         </EntityType>
-        <Association Name="FK__UserDetails__Users__Id">
-          <End Type="TransportManagementSystemModel.User" Role="User" Multiplicity="1" />
-          <End Type="TransportManagementSystemModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+        <Association Name="FK__Attendenc__EmpID__38996AB5">
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Attendence" Role="Attendence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Attendence">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Benefi__3A81B327">
+          <End Type="EmployeeMGMTModel.Benefit" Role="Benefit" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Benefit">
+              <PropertyRef Name="Benefit_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Benefit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Division__CID__398D8EEE">
+          <End Type="EmployeeMGMTModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Division" Role="Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="Division">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__DID__3C69FB99">
+          <End Type="EmployeeMGMTModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__DesId__3B75D760">
+          <End Type="EmployeeMGMTModel.Designation" Role="Designation" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__DivID__3D5E1FD2">
+          <End Type="EmployeeMGMTModel.Division" Role="Division" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Division">
+              <PropertyRef Name="DivID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Employ__3E52440B">
+          <End Type="EmployeeMGMTModel.Employee_Type" Role="Employee_Type" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Type">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__GID__3F466844">
+          <End Type="EmployeeMGMTModel.Grade" Role="Grade" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="GID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__SecID__403A8C7D">
+          <End Type="EmployeeMGMTModel.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SecID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="SecID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promotion__EmpID__412EB0B6">
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Promotion" Role="Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalaryHis__EmpID__4222D4EF">
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.SalaryHistory" Role="SalaryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="SalaryHistory">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transfer___EmpID__440B1D61">
+          <End Type="EmployeeMGMTModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.Transfer_Info" Role="Transfer_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Transfer_Info">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalaryHis__Promo__4316F928">
+          <End Type="EmployeeMGMTModel.Promotion" Role="Promotion" Multiplicity="0..1" />
+          <End Type="EmployeeMGMTModel.SalaryHistory" Role="SalaryHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="SalaryHistory">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserDetail__User__Id">
+          <End Type="EmployeeMGMTModel.User" Role="User" Multiplicity="1" />
+          <End Type="EmployeeMGMTModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -214,8 +980,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserTypeId__UserType__Id">
-          <End Type="TransportManagementSystemModel.UserType" Role="UserType" Multiplicity="1" />
-          <End Type="TransportManagementSystemModel.User" Role="User" Multiplicity="*" />
+          <End Type="EmployeeMGMTModel.UserType" Role="UserType" Multiplicity="1" />
+          <End Type="EmployeeMGMTModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserType">
               <PropertyRef Name="Id" />
@@ -230,43 +996,182 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TransportManagementSystemModelStoreContainer" CdmEntityContainer="OnBoadTaskEntities">
-          <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="TransportManagementSystemModel.Course">
-              <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
-                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+        <EntityContainerMapping StorageEntityContainer="EmployeeMGMTModelStoreContainer" CdmEntityContainer="EmployeeMGMTEntities">
+          <EntitySetMapping Name="Attendences">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Attendence">
+              <MappingFragment StoreEntitySet="Attendence">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Statuss" ColumnName="Statuss" />
+                <ScalarProperty Name="Attend_Date" ColumnName="Attend_Date" />
+                <ScalarProperty Name="OutTime_Lanch" ColumnName="OutTime_Lanch" />
+                <ScalarProperty Name="InTime_Lanch" ColumnName="InTime_Lanch" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="TransportManagementSystemModel.UserDetail">
-              <MappingFragment StoreEntitySet="UserDetails">
-                <ScalarProperty Name="CostPerMinute" ColumnName="CostPerMinute" />
-                <ScalarProperty Name="CostPerMile" ColumnName="CostPerMile" />
-                <ScalarProperty Name="PerAddress2" ColumnName="PerAddress2" />
-                <ScalarProperty Name="PerAddress1" ColumnName="PerAddress1" />
-                <ScalarProperty Name="PerZipCode" ColumnName="PerZipCode" />
-                <ScalarProperty Name="PerCity" ColumnName="PerCity" />
-                <ScalarProperty Name="PerState" ColumnName="PerState" />
-                <ScalarProperty Name="PerCountry" ColumnName="PerCountry" />
-                <ScalarProperty Name="CurAddress2" ColumnName="CurAddress2" />
-                <ScalarProperty Name="CurAddress1" ColumnName="CurAddress1" />
-                <ScalarProperty Name="CurZipCode" ColumnName="CurZipCode" />
-                <ScalarProperty Name="CurCity" ColumnName="CurCity" />
-                <ScalarProperty Name="CurState" ColumnName="CurState" />
-                <ScalarProperty Name="CurCountry" ColumnName="CurCountry" />
+          <EntitySetMapping Name="Benefits">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Benefit">
+              <MappingFragment StoreEntitySet="Benefit">
+                <ScalarProperty Name="Benefit_Type" ColumnName="Benefit_Type" />
+                <ScalarProperty Name="Benefit_ID" ColumnName="Benefit_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DName" ColumnName="DName" />
+                <ScalarProperty Name="DID" ColumnName="DID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Designation">
+              <MappingFragment StoreEntitySet="Designation">
+                <ScalarProperty Name="DesName" ColumnName="DesName" />
+                <ScalarProperty Name="DesId" ColumnName="DesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Division">
+              <MappingFragment StoreEntitySet="Division">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Division_Name" ColumnName="Division_Name" />
+                <ScalarProperty Name="DivID" ColumnName="DivID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Gross_Salary" ColumnName="Gross_Salary" />
+                <ScalarProperty Name="GID" ColumnName="GID" />
+                <ScalarProperty Name="EmployeeType_ID" ColumnName="EmployeeType_ID" />
+                <ScalarProperty Name="Benefit_ID" ColumnName="Benefit_ID" />
+                <ScalarProperty Name="DivID" ColumnName="DivID" />
+                <ScalarProperty Name="SecID" ColumnName="SecID" />
+                <ScalarProperty Name="DesId" ColumnName="DesId" />
+                <ScalarProperty Name="DID" ColumnName="DID" />
+                <ScalarProperty Name="parmanent_address" ColumnName="parmanent_address" />
+                <ScalarProperty Name="Present_address" ColumnName="Present_address" />
+                <ScalarProperty Name="Home_phone" ColumnName="Home_phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Maritual_status" ColumnName="Maritual_status" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Mother_Name" ColumnName="Mother_Name" />
+                <ScalarProperty Name="Father_Name" ColumnName="Father_Name" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_Type">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Employee_Type">
+              <MappingFragment StoreEntitySet="Employee_Type">
+                <ScalarProperty Name="Employee_Types" ColumnName="Employee_Types" />
+                <ScalarProperty Name="EmployeeType_ID" ColumnName="EmployeeType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Grade_Salary" ColumnName="Grade_Salary" />
+                <ScalarProperty Name="Grade_Name" ColumnName="Grade_Name" />
+                <ScalarProperty Name="GID" ColumnName="GID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="Gross_Salary" ColumnName="Gross_Salary" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Convences" ColumnName="Convences" />
+                <ScalarProperty Name="Medical" ColumnName="Medical" />
+                <ScalarProperty Name="House_Rent" ColumnName="House_Rent" />
+                <ScalarProperty Name="Basics" ColumnName="Basics" />
+                <ScalarProperty Name="promotion_active" ColumnName="promotion_active" />
+                <ScalarProperty Name="Active_date" ColumnName="Active_date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Promotion_type" ColumnName="Promotion_type" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalaryHeads">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.SalaryHead">
+              <MappingFragment StoreEntitySet="SalaryHead">
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Head_Name" ColumnName="Head_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalaryHistories">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.SalaryHistory">
+              <MappingFragment StoreEntitySet="SalaryHistory">
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="Gross_Salary" ColumnName="Gross_Salary" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="Convences" ColumnName="Convences" />
+                <ScalarProperty Name="Medical" ColumnName="Medical" />
+                <ScalarProperty Name="HouseRent" ColumnName="HouseRent" />
+                <ScalarProperty Name="Basics" ColumnName="Basics" />
+                <ScalarProperty Name="Dates" ColumnName="Dates" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="SalaryHistoryID" ColumnName="SalaryHistoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="Section_Name" ColumnName="Section_Name" />
+                <ScalarProperty Name="SecID" ColumnName="SecID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfer_Info">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.Transfer_Info">
+              <MappingFragment StoreEntitySet="Transfer_Info">
+                <ScalarProperty Name="StatusState" ColumnName="StatusState" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="TransferActiveDate" ColumnName="TransferActiveDate" />
+                <ScalarProperty Name="NewSection" ColumnName="NewSection" />
+                <ScalarProperty Name="OldSection" ColumnName="OldSection" />
+                <ScalarProperty Name="NewDivision" ColumnName="NewDivision" />
+                <ScalarProperty Name="OldDivision" ColumnName="OldDivision" />
+                <ScalarProperty Name="NewDepartment" ColumnName="NewDepartment" />
+                <ScalarProperty Name="OldDepartment" ColumnName="OldDepartment" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="TransferID" ColumnName="TransferID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TransportManagementSystemModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.User">
+              <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="AssignedRegionId" ColumnName="AssignedRegionId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -292,9 +1197,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetail">
+                <ScalarProperty Name="CostPerMinute" ColumnName="CostPerMinute" />
+                <ScalarProperty Name="CostPerMile" ColumnName="CostPerMile" />
+                <ScalarProperty Name="PerAddress2" ColumnName="PerAddress2" />
+                <ScalarProperty Name="PerAddress1" ColumnName="PerAddress1" />
+                <ScalarProperty Name="PerZipCode" ColumnName="PerZipCode" />
+                <ScalarProperty Name="PerCity" ColumnName="PerCity" />
+                <ScalarProperty Name="PerState" ColumnName="PerState" />
+                <ScalarProperty Name="PerCountry" ColumnName="PerCountry" />
+                <ScalarProperty Name="CurAddress2" ColumnName="CurAddress2" />
+                <ScalarProperty Name="CurAddress1" ColumnName="CurAddress1" />
+                <ScalarProperty Name="CurZipCode" ColumnName="CurZipCode" />
+                <ScalarProperty Name="CurCity" ColumnName="CurCity" />
+                <ScalarProperty Name="CurState" ColumnName="CurState" />
+                <ScalarProperty Name="CurCountry" ColumnName="CurCountry" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserTypes">
-            <EntityTypeMapping TypeName="TransportManagementSystemModel.UserType">
-              <MappingFragment StoreEntitySet="UserTypes">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -317,7 +1245,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

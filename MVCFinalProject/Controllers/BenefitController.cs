@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MVCFinalProject.Models;
+using HRMS.Service.Benefit;
+using HRMS.ViewModel;
+//using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
     public class BenefitController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        IBenefitService _IBenefitService = new BenefitService();
         // GET: /Benefit/
         public ActionResult Index()
         {
-            return View(db.Benefits.ToList());
+            return View(_IBenefitService.BenefitList());
         }
 
         // GET: /Benefit/Details/5
@@ -27,36 +28,14 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Benefit benefit = db.Benefits.Find(id);
+            BenefitViewModel benefit = _IBenefitService.Benefit(id);
             if (benefit == null)
             {
                 return HttpNotFound();
             }
             return View(benefit);
         }
-
-        // GET: /Benefit/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /Benefit/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Benefit_ID,Benefit_Type")] Benefit benefit)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Benefits.Add(benefit);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(benefit);
-        }
+        
 
         // GET: /Benefit/Edit/5
         public ActionResult Edit(int? id)
@@ -65,7 +44,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Benefit benefit = db.Benefits.Find(id);
+            BenefitViewModel benefit = _IBenefitService.Benefit(id);
             if (benefit == null)
             {
                 return HttpNotFound();
@@ -74,16 +53,13 @@ namespace MVCFinalProject.Controllers
         }
 
         // POST: /Benefit/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Benefit_ID,Benefit_Type")] Benefit benefit)
+        public ActionResult Edit(BenefitViewModel benefit)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(benefit).State = EntityState.Modified;
-                db.SaveChanges();
+                _IBenefitService.SaveBenifit(benefit);
                 return RedirectToAction("Index");
             }
             return View(benefit);
@@ -96,7 +72,8 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Benefit benefit = db.Benefits.Find(id);
+            BenefitViewModel benefit = _IBenefitService.Benefit(id);
+           // Benefit benefit = db.Benefits.Find(id);
             if (benefit == null)
             {
                 return HttpNotFound();
@@ -109,19 +86,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Benefit benefit = db.Benefits.Find(id);
-            db.Benefits.Remove(benefit);
-            db.SaveChanges();
+            _IBenefitService.DeleteBenifit(id);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }
