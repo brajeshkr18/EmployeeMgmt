@@ -84,6 +84,22 @@ namespace HRMS.Service.Master
             return company;
         }
 
+        public dynamic Employees(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return _Context.Employees;
+            }
+            return _Context.Employees.Find(id);
+        }
+        public dynamic Promotions(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                return _Context.Promotions;
+            }
+            return _Context.Promotions.Find(id);
+        }
         #endregion
     }
 }

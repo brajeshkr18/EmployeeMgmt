@@ -29,22 +29,23 @@ namespace HRMS.Service.Division
            // Mapper.Map(Divisions, desList);
             return Divisions;
         }
-        public DivisionViewModel Division(int? id)
+        public dynamic Division(int? id)
         {
-            DivisionViewModel avm = new DivisionViewModel();
+            // DivisionViewModel avm = new DivisionViewModel();
+            HRMS.Core.EntityModel.Division Division = new HRMS.Core.EntityModel.Division();
             try
             {
                 if (id != 0 && id != null)
                 {
-                    HRMS.Core.EntityModel.Division Division = _Context.Divisions.Find(id);
-                    Mapper.Map(Division, avm);
+                   Division = _Context.Divisions.Find(id);
+                    //Mapper.Map(Division, avm);
                 }
             }
             catch (Exception EX)
             {
 
             }
-            return avm;
+            return Division;
         }
         public dynamic EmployeeList()
         {

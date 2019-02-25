@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.Section;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
@@ -13,11 +15,11 @@ namespace MVCFinalProject.Controllers
     public class SectionController : Controller
     {
         private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        ISectionService _ISectionService = new SectionService();
         // GET: /Section/
         public ActionResult Index()
         {
-            return View(db.Sections.ToList());
+            return View(_ISectionService.SectionList().ToList());
         }
 
         // GET: /Section/Details/5
@@ -27,7 +29,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Section section = db.Sections.Find(id);
+            SectionViewModel section = _ISectionService.Section(id);
             if (section == null)
             {
                 return HttpNotFound();
@@ -35,40 +37,14 @@ namespace MVCFinalProject.Controllers
             return View(section);
         }
 
-        // GET: /Section/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /Section/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="SecID,Section_Name")] Section section)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Sections.Add(section);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(section);
-        }
-
+       
         // GET: /Section/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            SectionViewModel section = new SectionViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Section section = db.Sections.Find(id);
-            if (section == null)
-            {
-                return HttpNotFound();
+                section = _ISectionService.Section(id);
             }
             return View(section);
         }
@@ -78,12 +54,11 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="SecID,Section_Name")] Section section)
+        public ActionResult Edit( SectionViewModel section)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(section).State = EntityState.Modified;
-                db.SaveChanges();
+                _ISectionService.SaveSection(section);
                 return RedirectToAction("Index");
             }
             return View(section);
@@ -96,7 +71,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Section section = db.Sections.Find(id);
+            SectionViewModel section = _ISectionService.Section(id);
             if (section == null)
             {
                 return HttpNotFound();
@@ -109,19 +84,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Section section = db.Sections.Find(id);
-            db.Sections.Remove(section);
-            db.SaveChanges();
+            _ISectionService.DeleteSection(id);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

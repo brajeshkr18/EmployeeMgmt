@@ -19,7 +19,8 @@ namespace HRMS.Service.Master
         dynamic Grades(int? id);
         dynamic Sections(int? id);
         dynamic Companies();
-
+        dynamic Employees(int? id);
+        dynamic Promotions(int? id);
 
 
     }

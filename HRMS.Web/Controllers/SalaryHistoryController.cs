@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.Master;
+using HRMS.Service.SalaryHistory;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
@@ -13,12 +16,13 @@ namespace MVCFinalProject.Controllers
     public class SalaryHistoryController : Controller
     {
         private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        ISalaryHistoryService _ISalaryHistoryService = new SalaryHistoryService();
+        IMasterService _IMasterService = new MasterService();
         // GET: /SalaryHistory/
         public ActionResult Index()
         {
-            var salaryhistories = db.SalaryHistories.Include(s => s.Employee).Include(s => s.Promotion);
-            return View(salaryhistories.ToList());
+            var salaryhistories = _ISalaryHistoryService.SalaryHistoryList();
+            return View(salaryhistories);
         }
 
         // GET: /SalaryHistory/Details/5
@@ -35,48 +39,18 @@ namespace MVCFinalProject.Controllers
             }
             return View(salaryhistory);
         }
-
-        // GET: /SalaryHistory/Create
-        public ActionResult Create()
-        {
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name");
-            ViewBag.PromotionID = new SelectList(db.Promotions, "PromotionID", "Promotion_type");
-            return View();
-        }
-
-        // POST: /SalaryHistory/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="SalaryHistoryID,EmpID,Dates,Basics,HouseRent,Medical,Convences,Taxes,Gross_Salary,PromotionID")] SalaryHistory salaryhistory)
-        {
-            if (ModelState.IsValid)
-            {
-                db.SalaryHistories.Add(salaryhistory);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", salaryhistory.EmpID);
-            ViewBag.PromotionID = new SelectList(db.Promotions, "PromotionID", "Promotion_type", salaryhistory.PromotionID);
-            return View(salaryhistory);
-        }
-
+        
         // GET: /SalaryHistory/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            SalaryHistoryViewModel salaryhistory = new SalaryHistoryViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                salaryhistory = _ISalaryHistoryService.SalaryHistory(id);
             }
-            SalaryHistory salaryhistory = db.SalaryHistories.Find(id);
-            if (salaryhistory == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", salaryhistory.EmpID);
-            ViewBag.PromotionID = new SelectList(db.Promotions, "PromotionID", "Promotion_type", salaryhistory.PromotionID);
+           
+            ViewBag.EmpID = new SelectList(_IMasterService.Employees(0), "EmpID", "Name", salaryhistory.EmpID);
+            ViewBag.PromotionID = new SelectList(_IMasterService.Promotions(0), "PromotionID", "Promotion_type", salaryhistory.PromotionID);
             return View(salaryhistory);
         }
 
@@ -85,12 +59,11 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="SalaryHistoryID,EmpID,Dates,Basics,HouseRent,Medical,Convences,Taxes,Gross_Salary,PromotionID")] SalaryHistory salaryhistory)
+        public ActionResult Edit(SalaryHistoryViewModel salaryhistory)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(salaryhistory).State = EntityState.Modified;
-                db.SaveChanges();
+                _ISalaryHistoryService.SaveSalaryHistory(salaryhistory);
                 return RedirectToAction("Index");
             }
             ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", salaryhistory.EmpID);
@@ -101,15 +74,7 @@ namespace MVCFinalProject.Controllers
         // GET: /SalaryHistory/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SalaryHistory salaryhistory = db.SalaryHistories.Find(id);
-            if (salaryhistory == null)
-            {
-                return HttpNotFound();
-            }
+            SalaryHistoryViewModel salaryhistory = _ISalaryHistoryService.SalaryHistory(id);
             return View(salaryhistory);
         }
 
@@ -118,19 +83,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SalaryHistory salaryhistory = db.SalaryHistories.Find(id);
-            db.SalaryHistories.Remove(salaryhistory);
-            db.SaveChanges();
+            _ISalaryHistoryService.DeleteSalaryHistory(id);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

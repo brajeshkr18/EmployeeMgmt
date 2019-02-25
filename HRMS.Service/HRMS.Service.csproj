@@ -53,6 +53,16 @@
   <ItemGroup>
     <Compile Include="Company\CompanyService.cs" />
     <Compile Include="Company\ICompanyService.cs" />
+    <Compile Include="EmployeeType\EmployeeTypeService.cs" />
+    <Compile Include="EmployeeType\IEmployeeTypeService.cs" />
+    <Compile Include="Section\ISectionService.cs" />
+    <Compile Include="Section\SectionService.cs" />
+    <Compile Include="SalaryHead\ISalaryHeadService.cs" />
+    <Compile Include="SalaryHead\SalaryHeadService.cs" />
+    <Compile Include="Promotion\PromotionService.cs" />
+    <Compile Include="Promotion\IPromotionService.cs" />
+    <Compile Include="SalaryHistory\SalaryHistoryService.cs" />
+    <Compile Include="SalaryHistory\ISalaryHistoryService.cs" />
     <Compile Include="Department\DepartmentService.cs" />
     <Compile Include="Department\IDepartmentService.cs" />
     <Compile Include="Division\DivisionService.cs" />

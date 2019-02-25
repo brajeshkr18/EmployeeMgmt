@@ -6,19 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.Master;
+using HRMS.Service.Promotion;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
     public class PromotionController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        //private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
+        IPromotionService _IPromotionService = new PromotionService();
+        IMasterService _IMasterService = new MasterService();
         // GET: /Promotion/
         public ActionResult Index()
         {
-            var promotions = db.Promotions.Include(p => p.Employee);
-            return View(promotions.ToList());
+            var promotions = _IPromotionService.PromotionList();
+            return View(promotions);
         }
 
         // GET: /Promotion/Details/5
@@ -28,52 +32,27 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Promotion promotion = db.Promotions.Find(id);
+            PromotionViewModel promotion = _IPromotionService.Promotion(id);
             if (promotion == null)
             {
                 return HttpNotFound();
             }
             return View(promotion);
         }
-
-        // GET: /Promotion/Create
-        public ActionResult Create()
-        {
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name");
-            return View();
-        }
-
-        // POST: /Promotion/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="PromotionID,EmpID,Promotion_type,Amount,Active_date,promotion_active,Basics,House_Rent,Medical,Convences,Taxes,Gross_Salary")] Promotion promotion)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Promotions.Add(promotion);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", promotion.EmpID);
-            return View(promotion);
-        }
-
+        
         // GET: /Promotion/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            PromotionViewModel promotion =new  PromotionViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                promotion = _IPromotionService.Promotion(id);
             }
-            Promotion promotion = db.Promotions.Find(id);
             if (promotion == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", promotion.EmpID);
+            ViewBag.EmpID = new SelectList(_IMasterService.Employees(0), "EmpID", "Name", promotion.EmpID);
             return View(promotion);
         }
 
@@ -82,15 +61,14 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="PromotionID,EmpID,Promotion_type,Amount,Active_date,promotion_active,Basics,House_Rent,Medical,Convences,Taxes,Gross_Salary")] Promotion promotion)
+        public ActionResult Edit(PromotionViewModel promotion)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(promotion).State = EntityState.Modified;
-                db.SaveChanges();
+                _IPromotionService.SavePromotion(promotion);
                 return RedirectToAction("Index");
             }
-            ViewBag.EmpID = new SelectList(db.Employees, "EmpID", "Name", promotion.EmpID);
+            ViewBag.EmpID = new SelectList(_IMasterService.Employees(0), "EmpID", "Name", promotion.EmpID);
             return View(promotion);
         }
 
@@ -101,7 +79,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Promotion promotion = db.Promotions.Find(id);
+            PromotionViewModel promotion = _IPromotionService.Promotion(id);
             if (promotion == null)
             {
                 return HttpNotFound();
@@ -114,19 +92,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Promotion promotion = db.Promotions.Find(id);
-            db.Promotions.Remove(promotion);
-            db.SaveChanges();
+            _IPromotionService.DeletePromotion(id);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

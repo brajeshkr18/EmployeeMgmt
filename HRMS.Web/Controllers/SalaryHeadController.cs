@@ -6,18 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.SalaryHead;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
     public class SalaryHeadController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        ISalaryHeadService _ISalaryHeadService = new SalaryHeadService();
         // GET: /SalaryHead/
         public ActionResult Index()
         {
-            return View(db.SalaryHeads.ToList());
+            //return View(db.SalaryHeads.ToList());
+            return View(_ISalaryHeadService.SalaryHeadList());
         }
 
         // GET: /SalaryHead/Details/5
@@ -27,48 +29,21 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SalaryHead salaryhead = db.SalaryHeads.Find(id);
+            SalaryHeadViewModel salaryhead = _ISalaryHeadService.SalaryHead(id);
             if (salaryhead == null)
             {
                 return HttpNotFound();
             }
-            return View(salaryhead);
-        }
-
-        // GET: /SalaryHead/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /SalaryHead/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,Head_Name,Rate,Activity")] SalaryHead salaryhead)
-        {
-            if (ModelState.IsValid)
-            {
-                db.SalaryHeads.Add(salaryhead);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
             return View(salaryhead);
         }
 
         // GET: /SalaryHead/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            SalaryHeadViewModel salaryhead = new SalaryHeadViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SalaryHead salaryhead = db.SalaryHeads.Find(id);
-            if (salaryhead == null)
-            {
-                return HttpNotFound();
+                salaryhead = _ISalaryHeadService.SalaryHead(id);
             }
             return View(salaryhead);
         }
@@ -78,12 +53,11 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,Head_Name,Rate,Activity")] SalaryHead salaryhead)
+        public ActionResult Edit(SalaryHeadViewModel salaryhead)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(salaryhead).State = EntityState.Modified;
-                db.SaveChanges();
+                _ISalaryHeadService.SaveSalaryHead(salaryhead);
                 return RedirectToAction("Index");
             }
             return View(salaryhead);
@@ -92,14 +66,10 @@ namespace MVCFinalProject.Controllers
         // GET: /SalaryHead/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            SalaryHeadViewModel salaryhead = new SalaryHeadViewModel();
+            if (id != null && id != 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SalaryHead salaryhead = db.SalaryHeads.Find(id);
-            if (salaryhead == null)
-            {
-                return HttpNotFound();
+                salaryhead = _ISalaryHeadService.SalaryHead(id);
             }
             return View(salaryhead);
         }
@@ -109,19 +79,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SalaryHead salaryhead = db.SalaryHeads.Find(id);
-            db.SalaryHeads.Remove(salaryhead);
-            db.SaveChanges();
+            _ISalaryHeadService.DeleteSalaryHead(id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

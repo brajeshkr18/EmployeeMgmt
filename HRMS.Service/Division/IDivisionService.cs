@@ -13,7 +13,7 @@ namespace HRMS.Service.Division
     {
 
         dynamic DivisionList();
-        DivisionViewModel Division(int? id);
+        dynamic Division(int? id);
         dynamic EmployeeList();
         bool SaveDivision(HRMS.ViewModel.DivisionViewModel atten);
         bool DeleteDivision(int id);

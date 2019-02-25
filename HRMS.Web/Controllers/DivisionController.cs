@@ -67,14 +67,11 @@ namespace MVCFinalProject.Controllers
         // GET: /Division/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            dynamic division=new DivisionViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Division division = _IMasterService.Divisions(id);
-            if (division == null)
-            {
-                return HttpNotFound();
+                division = _IDivisionService.Division(id);
+                
             }
             ViewBag.CID = new SelectList(_IMasterService.Companies(), "CID", "CName", division.CID);
             return View(division);
@@ -85,7 +82,7 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="DivID,Division_Name,Location,CID")] DivisionViewModel division)
+        public ActionResult Edit( DivisionViewModel division)
         {
             if (ModelState.IsValid)
             {

@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMS.Service.EmployeeType;
+using HRMS.ViewModel;
 using MVCFinalProject.Models;
 
 namespace MVCFinalProject.Controllers
 {
     public class Employee_TypeController : Controller
     {
-        private MVC4ProjectEntities2 db = new MVC4ProjectEntities2();
-
+        IEmployeeTypeService _IEmployeeTypeService = new EmployeeTypeService();
         // GET: /Employee_Type/
         public ActionResult Index()
         {
-            return View(db.Employee_Type.ToList());
+            return View(_IEmployeeTypeService.EmployeeTypeList());
         }
 
         // GET: /Employee_Type/Details/5
@@ -27,7 +28,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee_Type employee_type = db.Employee_Type.Find(id);
+            Employee_TypeViewModel employee_type = _IEmployeeTypeService.EmployeeType(id);
             if (employee_type == null)
             {
                 return HttpNotFound();
@@ -35,40 +36,14 @@ namespace MVCFinalProject.Controllers
             return View(employee_type);
         }
 
-        // GET: /Employee_Type/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: /Employee_Type/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="EmployeeType_ID,Employee_Types")] Employee_Type employee_type)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Employee_Type.Add(employee_type);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(employee_type);
-        }
 
         // GET: /Employee_Type/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            Employee_TypeViewModel employee_type = new Employee_TypeViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee_Type employee_type = db.Employee_Type.Find(id);
-            if (employee_type == null)
-            {
-                return HttpNotFound();
+                employee_type = _IEmployeeTypeService.EmployeeType(id);
             }
             return View(employee_type);
         }
@@ -78,12 +53,11 @@ namespace MVCFinalProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="EmployeeType_ID,Employee_Types")] Employee_Type employee_type)
+        public ActionResult Edit(Employee_TypeViewModel employee_type)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee_type).State = EntityState.Modified;
-                db.SaveChanges();
+                _IEmployeeTypeService.SaveEmployeeType(employee_type);
                 return RedirectToAction("Index");
             }
             return View(employee_type);
@@ -96,7 +70,7 @@ namespace MVCFinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee_Type employee_type = db.Employee_Type.Find(id);
+            Employee_TypeViewModel employee_type = _IEmployeeTypeService.EmployeeType(id);
             if (employee_type == null)
             {
                 return HttpNotFound();
@@ -109,19 +83,9 @@ namespace MVCFinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee_Type employee_type = db.Employee_Type.Find(id);
-            db.Employee_Type.Remove(employee_type);
-            db.SaveChanges();
+            _IEmployeeTypeService.DeleteEmployeeType(id);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

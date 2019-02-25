@@ -25,7 +25,7 @@ namespace HRMS.Core.EntityModel
         public Nullable<decimal> Gross_Salary { get; set; }
         public Nullable<int> PromotionID { get; set; }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Promotion Promotion { get; set; }
+        public  Employee Employee { get; set; }
+        public  Promotion Promotion { get; set; }
     }
 }
