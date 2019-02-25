@@ -43,15 +43,10 @@ namespace MVCFinalProject.Controllers
         // GET: /Transfer_Info/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            Transfer_InfoViewModel transfer_info = new Transfer_InfoViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Transfer_InfoViewModel transfer_info = _ITransfer_InfoService.TransferInfo(id);
-            //Transfer_Info transfer_info = db.Transfer_Info.Find(id);
-            if (transfer_info == null)
-            {
-                return HttpNotFound();
+                transfer_info = _ITransfer_InfoService.TransferInfo(id);
             }
             ViewBag.EmpID = new SelectList(_IAttendencesService.EmployeeList(), "EmpID", "Name", transfer_info.EmpID);
             return View(transfer_info);
