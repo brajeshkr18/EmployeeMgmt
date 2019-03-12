@@ -76,7 +76,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /SalaryHead/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _ISalaryHeadService.DeleteSalaryHead(id);

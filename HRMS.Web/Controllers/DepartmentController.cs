@@ -80,7 +80,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Department/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult DeleteConfirmed(int id)
         {
             _IDepartMentService.DeleteDepartment(id);

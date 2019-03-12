@@ -81,7 +81,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Section/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _ISectionService.DeleteSection(id);

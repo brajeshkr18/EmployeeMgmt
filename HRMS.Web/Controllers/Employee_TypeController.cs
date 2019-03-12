@@ -79,8 +79,8 @@ namespace MVCFinalProject.Controllers
         }
 
         // POST: /Employee_Type/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("DeleteConfirmed")]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _IEmployeeTypeService.DeleteEmployeeType(id);

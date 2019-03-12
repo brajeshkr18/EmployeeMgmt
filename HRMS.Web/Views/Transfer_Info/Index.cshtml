@@ -12,7 +12,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Dashboard</h4>
+
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -39,7 +39,7 @@
                     </div>
 
                     <table class="table">
-                        <thead>
+                        <thead style="font-weight:bold">
                             <tr>
                                 <th>
                                     @Html.DisplayNameFor(model => model.OldDepartment)
@@ -47,18 +47,13 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.NewDepartment)
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.OldDivision)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NewDivision)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.OldSection)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NewSection)
-                                </th>
+                                @*<th>
+                                        @Html.DisplayNameFor(model => model.OldDivision)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NewDivision)
+                                    </th>*@
+
                                 <th>
                                     @Html.DisplayNameFor(model => model.TransferActiveDate)
                                 </th>
@@ -74,52 +69,48 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Employee.Name)
                                 </th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OldDepartment)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NewDepartment)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OldDivision)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NewDivision)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OldSection)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NewSection)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TransferActiveDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TransferDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Remark)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StatusState)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Employee.Name)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.TransferID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.TransferID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.TransferID })
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OldDepartment)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NewDepartment)
+                                    </td>
+                                    @*<td>
+                                            @Html.DisplayFor(modelItem => item.OldDivision)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NewDivision)
+                                        </td>*@
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TransferActiveDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TransferDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Remark)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StatusState)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Employee.Name)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.TransferID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.TransferID }) |
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.TransferID })*@
+                                        <i class="mdi mdi-delete" style="font-size:20px;color:red" onclick="btndelete(@item.TransferID)"></i>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -130,4 +121,45 @@
 
     </div>
 </div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Do you want to delete this </h4>
+            </div>
+            <div class="modal-footer">
+                @*<a class="btn btn-default" id="modal-btn-ok" href="~/Employee_Type/delete">Yes</a>*@
+                <button type="button" class="btn btn-default" id="modal-btn-ok" val='' onclick="OkClick()">Yes</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no" onclick="OnCancel()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function btndelete(id) {
 
+        $("#mi-modal").modal('show');
+        $('#modal-btn-ok').attr('val', id);
+    };
+
+    function OkClick() {
+
+        $.ajax({ //Do an ajax post to the controller
+            type: 'POST',
+            url: '/Transfer_Info/Delete/?id=' + $('#modal-btn-ok').attr("val"),
+            //data: JSON.stringify(JSONObject),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+
+        $("#mi-modal").modal('hide');
+        location.reload();
+    };
+
+    function OnCancel() {
+        //callback(false);
+        $("#mi-modal").modal('hide');
+        debugger;
+    };
+</script>

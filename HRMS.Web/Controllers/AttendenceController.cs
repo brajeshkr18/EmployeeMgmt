@@ -93,7 +93,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Attendence/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+      
         public ActionResult DeleteConfirmed(int id)
         {
             if(_IAttendencesService.DeleteAttendence(id))

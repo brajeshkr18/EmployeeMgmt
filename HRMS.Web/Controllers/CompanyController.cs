@@ -39,14 +39,10 @@ namespace MVCFinalProject.Controllers
         // GET: /Company/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            dynamic company = new HRMS.ViewModel.CompanyViewModel();
+            if (id != null && id != 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var company = _ICompanyService.Company(id);
-            if (company == null)
-            {
-                return HttpNotFound();
+                 company = _ICompanyService.Company(id);
             }
             return View(company);
         }
@@ -81,7 +77,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Company/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _ICompanyService.DeleteCompany(id);

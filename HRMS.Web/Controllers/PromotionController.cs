@@ -89,7 +89,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Promotion/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _IPromotionService.DeletePromotion(id);

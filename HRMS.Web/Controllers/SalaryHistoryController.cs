@@ -80,7 +80,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /SalaryHistory/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _ISalaryHistoryService.DeleteSalaryHistory(id);

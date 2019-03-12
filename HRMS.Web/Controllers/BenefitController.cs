@@ -40,15 +40,12 @@ namespace MVCFinalProject.Controllers
         // GET: /Benefit/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            BenefitViewModel benefit = new BenefitViewModel();
+            if (id != 0 && id!=null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                benefit = _IBenefitService.Benefit(id);
             }
-            BenefitViewModel benefit = _IBenefitService.Benefit(id);
-            if (benefit == null)
-            {
-                return HttpNotFound();
-            }
+           
             return View(benefit);
         }
 
@@ -83,7 +80,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Benefit/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _IBenefitService.DeleteBenifit(id);

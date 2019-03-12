@@ -40,15 +40,12 @@ namespace MVCFinalProject.Controllers
         // GET: /Designation/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            DesignationViewModel designation = new DesignationViewModel();
+            if (id != null && id!=0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                designation = _IDesignationService.Designation(id);
             }
-            DesignationViewModel designation = _IDesignationService.Designation(id);
-            if (designation == null)
-            {
-                return HttpNotFound();
-            }
+            
             return View(designation);
         }
 
@@ -84,7 +81,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Designation/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _IDesignationService.DeleteDesignation(id);

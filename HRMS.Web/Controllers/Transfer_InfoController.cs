@@ -84,7 +84,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Transfer_Info/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _ITransfer_InfoService.DeleteTransferInfo(id);

@@ -110,7 +110,7 @@ namespace MVCFinalProject.Controllers
 
         // POST: /Division/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             _IDivisionService.DeleteDivision(id);

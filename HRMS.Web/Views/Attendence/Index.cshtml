@@ -2,78 +2,160 @@
 
 @{
     //Layout = null;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
 
-<!DOCTYPE html>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Employee Type </h5>
+                        @Html.ActionLink("Add Employee_Type", "Edit", "Employee_Type", new { id = 0 })
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Attendence</title>
-</head>
-<body>
-    <h2>Attendence</h2>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.InTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OutTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InTime_Lanch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OutTime_Lanch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Attend_Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Statuss)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee.Name)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.InTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OutTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InTime_Lanch)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OutTime_Lanch)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attend_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Statuss)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+                    </div>
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OutTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InTime_Lanch)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OutTime_Lanch)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Attend_Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Statuss)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Employee.Name)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OutTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InTime_Lanch)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OutTime_Lanch)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Attend_Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Statuss)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Employee.Name)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @*@Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+                                    <i class="mdi mdi-delete" style="font-size:20px;color:red" onclick="btndelete(@item.ID)"></i>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function btndelete(id) {
+
+        $("#mi-modal").modal('show');
+        $('#modal-btn-ok').attr('val', id);
+    };
+
+    function OkClick() {
+
+        $.ajax({ //Do an ajax post to the controller
+            type: 'POST',
+            url: '/Attendence/Delete/?id=' + $('#modal-btn-ok').attr("val"),
+            //data: JSON.stringify(JSONObject),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+
+        $("#mi-modal").modal('hide');
+        location.reload();
+    };
+
+    function OnCancel() {
+        //callback(false);
+        $("#mi-modal").modal('hide');
+        debugger;
+    };
+</script>
+<script>
+    function btndelete(id) {
+
+        $("#mi-modal").modal('show');
+        $('#modal-btn-ok').attr('val', id);
+    };
+
+    function OkClick() {
+
+        $.ajax({ //Do an ajax post to the controller
+            type: 'POST',
+            url: '/Employee_Type/DeleteConfirmed/?id=' + $('#modal-btn-ok').attr("val"),
+            //data: JSON.stringify(JSONObject),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+
+        $("#mi-modal").modal('hide');
+        location.reload();
+    };
+
+    function OnCancel() {
+        //callback(false);
+        $("#mi-modal").modal('hide');
+        debugger;
+    };
+</script>

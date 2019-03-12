@@ -77,8 +77,8 @@ namespace HRMS.Service.Department
             try
             {
 
-                HRMS.Core.EntityModel.Company comp = _Context.Companies.Find(id);
-                _Context.Companies.Remove(comp); ;
+                HRMS.Core.EntityModel.Department dep = _Context.Departments.Find(id);
+                _Context.Departments.Remove(dep); ;
                 _Context.SaveChanges();
                 return true;
             }

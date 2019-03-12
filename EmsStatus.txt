@@ -1,0 +1,8 @@
+1.Benefit --refresh not working properly working properly -rest working properly
+2.Department --refresh not working properly -rest working properly
+3.Division  --need to work on
+4.Designation --no problem 
+5.Company --need to work on edit/create
+6.section --No Problem
+7.Employee Type--No Problem
+
